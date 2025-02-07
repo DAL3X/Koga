@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadOptions() {
-        // TODO load options from device
-       this.options = new Options();
+        // TODO load options from device instead of hardcode
+       this.options = new Options(7, 3, 1, 2.2, 3);
     }
 }

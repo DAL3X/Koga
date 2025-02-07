@@ -9,16 +9,6 @@ public class Options {
     private double maxCalorieScore;
     private int maxCarbDuplicates;
 
-    // Constructor with default values
-    public Options () {
-        this.numberDays = 7;
-        this.numberMeat = 3;
-        this.maxDuplicate = 1;
-        this.maxCalorieScore = 2.2;
-        this.maxCarbDuplicates = 3;
-    }
-
-    // Constructor for set options
     public Options (int numberDays, int numberMeat, int maxDuplicate, double maxCalorieScore, int maxCarbDuplicates) {
         this.numberDays = numberDays;
         this.numberMeat = numberMeat;
