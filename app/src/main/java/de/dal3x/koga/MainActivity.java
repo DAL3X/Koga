@@ -10,11 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import de.dal3x.koga.options.Options;
-
 public class MainActivity extends AppCompatActivity {
 
-    private Options options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,31 +24,13 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        loadOptions();
-
         Button kogaButton = findViewById(R.id.button_koga);
-        kogaButton.setOnClickListener(view -> startActivity(KogaActivity.class));
+        kogaButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), KogaActivity.class)));
         Button addMenuButton = findViewById(R.id.button_addmenu);
-        addMenuButton.setOnClickListener(view -> startActivity(AddActivity.class));
+        addMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), AddActivity.class)));
         Button listMenuButton = findViewById(R.id.button_listmenu);
-        listMenuButton.setOnClickListener(view -> startActivity(ListActivity.class));
+        listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
         Button optionButton = findViewById(R.id.button_options);
-        optionButton.setOnClickListener(view -> startActivity(OptionsActivity.class));
-    }
-
-    // Starts an activity with all options bundled up
-    private void startActivity (Class<?> activityClass) {
-        Intent intent = new Intent(this, activityClass);
-        intent.putExtra(String.valueOf(R.string.options_days), this.options.getNumberDays());
-        intent.putExtra(String.valueOf(R.string.options_meat), this.options.getNumberMeat());
-        intent.putExtra(String.valueOf(R.string.options_duplicate), this.options.getMaxDuplicate());
-        intent.putExtra(String.valueOf(R.string.options_health), this.options.getMaxHealthScore());
-        intent.putExtra(String.valueOf(R.string.options_carb), this.options.getMaxCarbDuplicates());
-        startActivity(intent);
-    }
-
-    private void loadOptions() {
-        // TODO load options from device instead of hardcode
-       this.options = new Options(7, 3, 1, 2.2, 3);
+        optionButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
     }
 }

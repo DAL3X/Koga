@@ -9,6 +9,14 @@ public class Options {
     private double maxHealthScore;
     private int maxCarbDuplicates;
 
+    // Default value constructor
+    public Options() {
+        setNumberDays(7);
+        setNumberMeat(3);
+        setMaxDuplicate(1);
+        setMaxHealthScore(2.2);
+        setMaxCarbDuplicates(3);
+    }
     public Options (int numberDays, int numberMeat, int maxDuplicate, double maxHealthScore, int maxCarbDuplicates) {
         setNumberDays(numberDays);
         setNumberMeat(numberMeat);
