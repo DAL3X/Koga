@@ -17,7 +17,6 @@ import de.dal3x.koga.data.room.example.AppDatabase;
 import de.dal3x.koga.data.room.example.User;
 import de.dal3x.koga.data.room.example.UserDao;
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
