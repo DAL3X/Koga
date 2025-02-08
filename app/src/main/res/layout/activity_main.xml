@@ -11,8 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:orientation="horizontal" >
+        android:background="@color/lightBlue"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/header_home"
@@ -21,6 +21,7 @@
             android:layout_weight="1"
             android:text="@string/header_home"
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="34sp" />
     </LinearLayout>
 
@@ -35,9 +36,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:backgroundTint="@color/red"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:text="@string/button_koga"
+            android:textColor="@color/white"
             android:textSize="60sp" />
 
         <Button
@@ -45,9 +48,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:backgroundTint="@color/green"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:text="@string/button_addmenu"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <Button
@@ -55,9 +60,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:backgroundTint="@color/darkBlue"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:text="@string/button_listmenu"
+            android:textColor="@color/white"
             android:textSize="24sp" />
 
         <Button
@@ -65,9 +72,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="2"
+            android:backgroundTint="@color/yellow"
             android:paddingTop="12dp"
             android:paddingBottom="12dp"
             android:text="@string/button_options"
+            android:textColor="@color/white"
             android:textSize="24sp" />
     </LinearLayout>
 
