@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Koga</string>
     <string name="header_home">Home</string>
+    <string name="header_add">Add Menu</string>
+    <string name="header_list">List</string>
+    <string name="header_options">Option</string>
 
     <string name="button_koga">Koga!</string>
     <string name="button_addmenu">Add Menu</string>
     <string name="button_listmenu">List Menus</string>
     <string name="button_options">Options</string>
+
+    <string name="button_save">Save</string>
 
 </resources>
