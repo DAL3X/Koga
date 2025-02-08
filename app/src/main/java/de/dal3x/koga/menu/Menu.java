@@ -6,6 +6,7 @@ import java.util.List;
 
 /** Represents a menu consisting of a name, ingredients, a likeness value, health score,
  * veggie boolean, carbohydrate type.
+ * It can be linked together with a second menu to create a 2-day menu. The link gets identified via a menu name.
  */
 public class Menu {
 
@@ -15,7 +16,10 @@ public class Menu {
     private HealthScore healthScore;
     private boolean isVeggie;
     private Carbohydrate carbohydrate;
+    private String link;
+    private boolean isLinked;
 
+    // Use this constructor for building single menus without links
     public Menu(String name, List<Pair<String, String>> ingredients, int likeness, HealthScore healthScore, boolean isVeggie, Carbohydrate carbohydrate) {
         setName(name);
         setIngredients(ingredients);
@@ -23,6 +27,19 @@ public class Menu {
         setHealthScore(healthScore);
         setVeggie(isVeggie);
         setCarbohydrate(carbohydrate);
+        isLinked = false;
+    }
+
+    // Use this constructor for building double menus with links
+    public Menu(String name, List<Pair<String, String>> ingredients, int likeness, HealthScore healthScore, boolean isVeggie, Carbohydrate carbohydrate, String link) {
+        setName(name);
+        setIngredients(ingredients);
+        setLikeness(likeness);
+        setHealthScore(healthScore);
+        setVeggie(isVeggie);
+        setCarbohydrate(carbohydrate);
+        setLink(link);
+        isLinked = true;
     }
 
     public String getName() {
@@ -72,5 +89,23 @@ public class Menu {
 
     public void setCarbohydrate(Carbohydrate carbohydrate) {
         this.carbohydrate = carbohydrate;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+        isLinked = true;
+    }
+
+    public void destroyLink(String link) {
+        this.link = "";
+        isLinked = false;
+    }
+
+    public boolean isLinked() {
+        return isLinked;
     }
 }
