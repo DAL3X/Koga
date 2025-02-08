@@ -42,11 +42,11 @@ public class MainActivity extends AppCompatActivity {
     // Starts an activity with all options bundled up
     private void startActivity (Class<?> activityClass) {
         Intent intent = new Intent(this, activityClass);
-        intent.putExtra("numberDays", this.options.getNumberDays());
-        intent.putExtra("numberMeat", this.options.getNumberMeat());
-        intent.putExtra("maxDuplicate", this.options.getMaxDuplicate());
-        intent.putExtra("maxCalorieScore", this.options.getMaxCalorieScore());
-        intent.putExtra("maxCarbDuplicates", this.options.getMaxCarbDuplicates());
+        intent.putExtra(String.valueOf(R.string.options_days), this.options.getNumberDays());
+        intent.putExtra(String.valueOf(R.string.options_meat), this.options.getNumberMeat());
+        intent.putExtra(String.valueOf(R.string.options_duplicate), this.options.getMaxDuplicate());
+        intent.putExtra(String.valueOf(R.string.options_health), this.options.getMaxHealthScore());
+        intent.putExtra(String.valueOf(R.string.options_carb), this.options.getMaxCarbDuplicates());
         startActivity(intent);
     }
 

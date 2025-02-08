@@ -10,6 +10,12 @@
     <string name="button_listmenu">List Menus</string>
     <string name="button_options">Options</string>
 
+    <string name="options_days">numberDays</string>
+    <string name="options_meat">numberMeat</string>
+    <string name="options_duplicate">maxDuplicate</string>
+    <string name="options_health">maxHealthScore</string>
+    <string name="options_carb">maxCarbDuplicates</string>
+
     <string name="button_save">Save</string>
     <string name="text_name_input">Name:</string>
     <string name="textinput_name">Essens-Name</string>
