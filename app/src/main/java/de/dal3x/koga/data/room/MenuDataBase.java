@@ -2,7 +2,6 @@ package de.dal3x.koga.data.room;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
 
 import de.dal3x.koga.menu.Menu;
 

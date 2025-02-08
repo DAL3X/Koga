@@ -62,7 +62,6 @@ public class DataBaseTest {
         };
         Runnable runnable2 = () -> {
             @NonNull SingleObserver<List<User>> x = userDao.getAll().subscribeWith(observer);
-
         };
         Thread thread2 = new Thread(runnable2);
         thread2.start();

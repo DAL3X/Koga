@@ -7,7 +7,7 @@ public enum HealthScore {
 
     public final int number;
 
-    private HealthScore(int number) {
+    HealthScore(int number) {
         this.number = number;
     }
 }

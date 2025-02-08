@@ -6,5 +6,5 @@ public enum Carbohydrate {
     POTATO,
     BREAD,
     OTHER,
-    NO;
+    NO
 }
