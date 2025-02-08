@@ -11,5 +11,7 @@
     <string name="button_options">Options</string>
 
     <string name="button_save">Save</string>
+    <string name="text_name_input">Name:</string>
+    <string name="textinput_name">Essens-Name</string>
 
 </resources>
