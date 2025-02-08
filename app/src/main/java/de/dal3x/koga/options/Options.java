@@ -1,6 +1,9 @@
 package de.dal3x.koga.options;
 
+import androidx.room.Entity;
+
 //A data object encapsulating the selected application options
+@Entity
 public class Options {
 
     private int numberDays;

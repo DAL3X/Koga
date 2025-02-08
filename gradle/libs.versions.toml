@@ -1,6 +1,7 @@
 [versions]
 agp = "8.8.0"
 datastore = "1.1.2"
+gson = "2.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -9,10 +10,12 @@ material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
 datastorePreferencesRxjava2 = "1.1.2"
+roomRuntime = "2.6.1"
 
 [libraries]
 datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 datastore-rxjava2 = { module = "androidx.datastore:datastore-rxjava2", version.ref = "datastore" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -21,6 +24,10 @@ material = { group = "com.google.android.material", name = "material", version.r
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 datastore-preferences-rxjava2 = { group = "androidx.datastore", name = "datastore-preferences-rxjava2", version.ref = "datastorePreferencesRxjava2" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+room-paging = { module = "androidx.room:room-paging", version.ref = "roomRuntime" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+room-rxjava3 = { module = "androidx.room:room-rxjava3", version.ref = "roomRuntime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
