@@ -12,10 +12,6 @@ import java.util.Map;
 import de.dal3x.koga.menu.room.MenuDAO;
 import de.dal3x.koga.menu.room.MenuDataBase;
 import de.dal3x.koga.util.Names;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.CompletableObserver;
-import io.reactivex.rxjava3.core.SingleObserver;
-import io.reactivex.rxjava3.disposables.Disposable;
 
 /** Uses the room library.
  * Menu repository implements as a singleton to ensure only one database dao for menus exists.
@@ -34,16 +30,17 @@ public class MenuRepository {
 
     private final Map<String, Menu> menus = new HashMap<>();
     private final MenuDAO dao;
+    private final MenuDataBase database;
 
     public void addMenu(Menu menu) {
         menus.put(menu.getName(), menu);
-        addDataBaseMenu(menu);
+        MenuDataBase.executor.execute(() -> {dao.insert(menu);});
     }
 
     public void deleteMenu(String name) {
         menus.remove(name);
         Menu shadowMenu = new Menu(name);
-        deleteDataBaseMenu(shadowMenu);
+        MenuDataBase.executor.execute(() -> {dao.delete(shadowMenu);});
     }
 
     public List<Menu> getAllMenus() {
@@ -51,48 +48,17 @@ public class MenuRepository {
     }
 
     private MenuRepository(Context appContext) {
-        MenuDataBase database = Room.databaseBuilder(appContext, MenuDataBase.class, Names.MENUSTORE.string).build();
+        database = Room.databaseBuilder(appContext, MenuDataBase.class, Names.MENUSTORE.string).build();
         dao = database.menuDAO();
         getDataBaseMenus();
     }
 
-    private void addDataBaseMenu(Menu menu) {
-        CompletableObserver insertObserver = new CompletableObserver() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {}
-            @Override
-            public void onComplete() {}
-            @Override
-            public void onError(@NonNull Throwable e) {}
-        };
-        dao.insert(menu).subscribe(insertObserver);
-    }
-
-    private void deleteDataBaseMenu(Menu menu) {
-        CompletableObserver deleteObserver = new CompletableObserver() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {}
-            @Override
-            public void onComplete() {}
-            @Override
-            public void onError(@NonNull Throwable e) {}
-        };
-        dao.delete(menu).subscribe(deleteObserver);
-    }
-
     private void getDataBaseMenus() {
-        SingleObserver<List<Menu>> queryObserver = new SingleObserver<>() {
-            @Override
-            public void onSubscribe(@NonNull Disposable d) {}
-            @Override
-            public void onSuccess(@NonNull List<Menu> menuList) {
-                for (Menu menu : menuList) {
-                    menus.put(menu.getName(), menu);
-                }
+        MenuDataBase.executor.execute(() -> {
+            List<Menu> menuList = dao.getAll().blockingGet();
+            for (Menu menu : menuList) {
+                menus.put(menu.getName(), menu);
             }
-            @Override
-            public void onError(@NonNull Throwable e) {}
-        };
-        dao.getAll().subscribe(queryObserver);
+        });
     }
 }
