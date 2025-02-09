@@ -2,7 +2,7 @@ package de.dal3x.koga.options;
 
 import androidx.room.Entity;
 
-//A data object encapsulating the selected application options
+// A data object encapsulating the selected application options
 @Entity
 public class Options {
 
@@ -12,14 +12,8 @@ public class Options {
     private double maxHealthScore;
     private int maxCarbDuplicates;
 
-    // Default value constructor
-    public Options() {
-        setNumberDays(7);
-        setNumberMeat(3);
-        setMaxDuplicate(1);
-        setMaxHealthScore(2.2);
-        setMaxCarbDuplicates(3);
-    }
+    public Options() {}
+
     public Options (int numberDays, int numberMeat, int maxDuplicate, double maxHealthScore, int maxCarbDuplicates) {
         setNumberDays(numberDays);
         setNumberMeat(numberMeat);
