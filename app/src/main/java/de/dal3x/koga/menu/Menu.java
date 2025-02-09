@@ -2,6 +2,7 @@ package de.dal3x.koga.menu;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import de.dal3x.koga.menu.room.Recipe;
@@ -36,6 +37,11 @@ public class Menu {
         setCarbohydrate(carbohydrate);
         setLink(link);
         isLinked = !link.isBlank(); //sets isLinked to false if link equals empty string
+    }
+
+    @Ignore
+    public Menu(@NonNull String name) {
+        this.name = name;
     }
 
     @NonNull

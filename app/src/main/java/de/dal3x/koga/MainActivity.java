@@ -10,8 +10,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+import de.dal3x.koga.menu.MenuRepository;
+import de.dal3x.koga.options.datastore.OptionsDataStore;
 
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // Implement all button functionality
         Button kogaButton = findViewById(R.id.button_koga);
         kogaButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), KogaActivity.class)));
         Button addMenuButton = findViewById(R.id.button_addmenu);
@@ -32,5 +35,9 @@ public class MainActivity extends AppCompatActivity {
         listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
         Button optionButton = findViewById(R.id.button_options);
         optionButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
+
+        // Pre-load all needed resources
+        MenuRepository.initializeInstance(getApplicationContext());
+        OptionsDataStore.initializeInstance(getApplicationContext());
     }
 }
