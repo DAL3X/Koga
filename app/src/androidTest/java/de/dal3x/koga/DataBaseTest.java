@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import de.dal3x.koga.data.room.example.AppDatabase;
@@ -29,12 +30,9 @@ import io.reactivex.rxjava3.disposables.Disposable;
 @RunWith(AndroidJUnit4.class)
 public class DataBaseTest {
 
-    @Test
-    public void testDB() throws InterruptedException {
+    private List<User> users = new LinkedList<>();
 
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        AppDatabase db = Room.databaseBuilder(appContext, AppDatabase.class, "database-name").build();
-        UserDao userDao = db.userDao();
+    private void addUser(UserDao dao, User u) throws InterruptedException {
         CompletableObserver insertObserver = new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {}
@@ -43,16 +41,25 @@ public class DataBaseTest {
             @Override
             public void onError(@NonNull Throwable e) {}
         };
+        Runnable runnable = () -> {
+            assertNotNull(u);
+            dao.insert(u).subscribe(insertObserver);
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+        thread.join();
+        getUsers(dao);
+    }
+
+    private void getUsers(UserDao dao) throws InterruptedException {
         SingleObserver<List<User>> queryObserver = new SingleObserver<>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
             }
 
             @Override
-            public void onSuccess(@NonNull List<User> users) {
-                for (int i = 0; i < users.size(); i++) {
-                    assertEquals(i+1, users.get(i).uid);
-                }
+            public void onSuccess(@NonNull List<User> usersList) {
+                users = usersList;
             }
 
             @Override
@@ -60,44 +67,60 @@ public class DataBaseTest {
                 fail();
             }
         };
-
-        // Add User 1
-        User u = new User(1, "test1", "test2");
         Runnable runnable = () -> {
-            assertNotNull(u);
-            userDao.insert(u).subscribe(insertObserver);
+            dao.getAll().subscribe(queryObserver);
         };
         Thread thread = new Thread(runnable);
         thread.start();
         thread.join();
+    }
 
+    private void deleteUser(UserDao dao, User u) throws InterruptedException {
+        CompletableObserver deleteObserver = new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {}
+            @Override
+            public void onComplete() {}
+            @Override
+            public void onError(@NonNull Throwable e) {}
+        };
+        Runnable runnable = () -> {
+            assertNotNull(u);
+            dao.delete(u).subscribe(deleteObserver);
+        };
+        Thread thread = new Thread(runnable);
+        thread.start();
+        thread.join();
+        getUsers(dao);
+    }
 
+    @Test
+    public void testDB() throws InterruptedException {
+
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        AppDatabase db = Room.databaseBuilder(appContext, AppDatabase.class, "database-name").build();
+        UserDao userDao = db.userDao();
+
+        // Add User 1
+        User u = new User(1, "test1", "test2");
+        addUser(userDao, u);
         // Check if one user is present
-        Runnable runnable2 = () -> {
-            @NonNull SingleObserver<List<User>> x = userDao.getAll().subscribeWith(queryObserver);
-        };
-        thread = new Thread(runnable2);
-        thread.start();
-        thread.join();
-
+        getUsers(userDao);
+        assertEquals(1, users.size());
+        assertEquals("test1", users.get(0).firstName);
         // Add User 2
-        User u2 = new User(2, "test1", "test2");
-        Runnable runnable3 = () -> {
-            assertNotNull(u2);
-            userDao.insert(u2).subscribe(insertObserver);
-        };
-        thread = new Thread(runnable3);
-        thread.start();
-        thread.join();
-
+        User u2 = new User(2, "test3", "test4");
+        addUser(userDao, u2);
         // Check if both users are present
-        Runnable runnable4 = () -> {
-            @NonNull SingleObserver<List<User>> x = userDao.getAll().subscribeWith(queryObserver);
-        };
-        thread = new Thread(runnable4);
-        thread.start();
-        thread.join();
-
-
+        getUsers(userDao);
+        assertEquals(2, users.size());
+        assertEquals("test1", users.get(0).firstName);
+        assertEquals(2, users.size());
+        assertEquals("test3", users.get(1).firstName);
+        // Remove both users
+        deleteUser(userDao, u);
+        deleteUser(userDao, u2);
+        // Check if users list is empty
+        assertEquals(0, users.size());
     }
 }
