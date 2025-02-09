@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -90,13 +91,13 @@ public class DataBaseTest {
         MenuDAO menuDao = db.menuDAO();
 
         // Add User 1
-        Menu menu = new Menu("test1", new Recipe(new LinkedList<>()), 3, HealthScore.NORMAL, true, Carbohydrate.BREAD, "");
+        Menu menu = new Menu("test1", new Recipe(new HashMap<>()), 3, HealthScore.NORMAL, true, Carbohydrate.BREAD, "");
         addMenu(menuDao, menu);
         // Check if one user is present
         assertEquals(1, menus.size());
         assertEquals("test1", menus.get(0).getName());
         // Add User 2
-        Menu menu2 = new Menu("test2", new Recipe(new LinkedList<>()), 3, HealthScore.NORMAL, true, Carbohydrate.BREAD, "");
+        Menu menu2 = new Menu("test2", new Recipe(new HashMap<>()), 3, HealthScore.NORMAL, true, Carbohydrate.BREAD, "");
         addMenu(menuDao, menu2);
         // Check if both users are present
         assertEquals(2, menus.size());
