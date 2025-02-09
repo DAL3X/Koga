@@ -4,17 +4,17 @@ import java.util.Map;
 
 public class Recipe {
 
-    private Map<String, String> contents;
+    private Map<String, Double> contents;
 
-    public Recipe(Map<String, String> contents) {
+    public Recipe(Map<String, Double> contents) {
         setContents(contents);
     }
 
-    public Map<String, String> getContents() {
+    public Map<String, Double> getContents() {
         return contents;
     }
 
-    public void setContents(Map<String, String> contents) {
+    public void setContents(Map<String, Double> contents) {
         this.contents = contents;
     }
 }
