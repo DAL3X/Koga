@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import de.dal3x.koga.data.room.Recipe;
+import de.dal3x.koga.menu.room.Recipe;
 
 /** Represents a menu consisting of a name, ingredients, a likeness value, health score,
  * veggie boolean, carbohydrate type.

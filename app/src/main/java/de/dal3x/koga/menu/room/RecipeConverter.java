@@ -1,4 +1,4 @@
-package de.dal3x.koga.data.room;
+package de.dal3x.koga.menu.room;
 
 import androidx.room.TypeConverter;
 

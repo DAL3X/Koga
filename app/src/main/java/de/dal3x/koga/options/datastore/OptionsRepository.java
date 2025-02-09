@@ -1,4 +1,4 @@
-package de.dal3x.koga.data;
+package de.dal3x.koga.options.datastore;
 
 import android.content.Context;
 
@@ -13,20 +13,20 @@ import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 // DataStore wrapper implementing a singleton to make sure only one RXDataStore is used per application.
-public class DataStore {
+public class OptionsRepository {
 
-    private static DataStore instance;
+    private static OptionsRepository instance;
 
     private RxDataStore<Preferences> rxDataStore;
 
-    private DataStore(){} // Never use this constructor
-    private DataStore(Context context) {
+    private OptionsRepository(){} // Never use this constructor
+    private OptionsRepository(Context context) {
         rxDataStore = new RxPreferenceDataStoreBuilder(context, Names.DATASTORE.string).build();
     }
 
-    public static DataStore getInstance(Context context) {
+    public static OptionsRepository getInstance(Context context) {
         if (instance == null) {
-            instance = new DataStore(context);
+            instance = new OptionsRepository(context);
         }
         return instance;
     }

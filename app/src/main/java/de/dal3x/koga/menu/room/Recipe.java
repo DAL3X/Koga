@@ -1,6 +1,4 @@
-package de.dal3x.koga.data.room;
-
-import android.util.Pair;
+package de.dal3x.koga.menu.room;
 
 import java.util.Map;
 

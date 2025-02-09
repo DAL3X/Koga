@@ -15,9 +15,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import de.dal3x.koga.data.room.MenuDAO;
-import de.dal3x.koga.data.room.MenuDataBase;
-import de.dal3x.koga.data.room.Recipe;
+import de.dal3x.koga.menu.room.MenuDAO;
+import de.dal3x.koga.menu.room.MenuDataBase;
+import de.dal3x.koga.menu.room.Recipe;
 import de.dal3x.koga.menu.Carbohydrate;
 import de.dal3x.koga.menu.HealthScore;
 import de.dal3x.koga.menu.Menu;
