@@ -20,16 +20,15 @@ import io.reactivex.rxjava3.disposables.Disposable;
 /** Uses the room library.
  * Menu repository implements as a singleton to ensure only one database dao for menus exists.
  * It holds a menu map in RAM but keeps it consistent with the background database storage.
- * Before MenuRepository can be used, it has to be initialized with an app context to allow database access.
- * This is done to enable pre-loading of needed resources.
 */
 public class MenuRepository {
 
     private static MenuRepository instance;
-    public static void initializeInstance(Context appContext) {
-        instance = new MenuRepository(appContext);
-    }
-    public static MenuRepository getInstance() {
+
+    public static MenuRepository getInstance(Context appContext) {
+        if (instance == null) {
+            instance = new MenuRepository(appContext);
+        }
         return instance;
     }
 

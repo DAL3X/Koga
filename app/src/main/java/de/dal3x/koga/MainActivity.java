@@ -28,16 +28,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Implement all button functionality
         Button kogaButton = findViewById(R.id.button_koga);
-        kogaButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), KogaActivity.class)));
+        kogaButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), KogaActivity.class)));
         Button addMenuButton = findViewById(R.id.button_addmenu);
-        addMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), AddActivity.class)));
+        addMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), AddActivity.class)));
         Button listMenuButton = findViewById(R.id.button_listmenu);
-        listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
+        listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), OptionsActivity.class)));
         Button optionButton = findViewById(R.id.button_options);
-        optionButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
+        optionButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), OptionsActivity.class)));
 
-        // Pre-load all needed resources
-        MenuRepository.initializeInstance(getApplicationContext());
-        OptionsDataStore.initializeInstance(getApplicationContext());
+        // Initialize all resources if not already done
+        MenuRepository.getInstance(getApplication());
+        OptionsDataStore.getInstance(getApplication());
     }
 }

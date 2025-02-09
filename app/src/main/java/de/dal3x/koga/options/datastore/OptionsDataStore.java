@@ -16,17 +16,16 @@ import io.reactivex.Single;
 /** Uses the RXJava library
  * Data storage implemented as a singleton to make sure only one RXDataStore is used per application.
  * Holds options in RAM but keeps them consistent with background storage.
- * Before OptionsDataStore can be used, it has to be initialized with an app context to allow datastore access.
- * This is done to enable pre-loading of needed resources.
  */
 public class OptionsDataStore {
 
     private static OptionsDataStore instance;
-    public static void initializeInstance(Context appContext) {
-        instance = new OptionsDataStore(appContext);
-        instance.loadDataStoreOptions();
-    }
-    public static OptionsDataStore getInstance() {
+
+    public static OptionsDataStore getInstance(Context appContext) {
+        if (instance == null) {
+            instance = new OptionsDataStore(appContext);
+            instance.loadDataStoreOptions();
+        }
         return instance;
     }
 
