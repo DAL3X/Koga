@@ -8,16 +8,18 @@ import androidx.room.Query;
 import java.util.List;
 
 import de.dal3x.koga.menu.Menu;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.Single;
 
 @Dao
 public interface MenuDAO {
 
     @Query("SELECT * FROM Menu")
-    List<Menu> getAll();
+    Single<List<Menu>> getAll();
 
     @Insert
-    void insert(Menu menu);
+    Completable insert(Menu menu);
 
     @Delete
-    void delete(Menu menu);
+    Completable delete(Menu menu);
 }
