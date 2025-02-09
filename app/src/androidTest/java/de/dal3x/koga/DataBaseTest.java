@@ -44,13 +44,8 @@ public class DataBaseTest {
             @Override
             public void onError(@NonNull Throwable e) {}
         };
-        Runnable runnable = () -> {
-            assertNotNull(menu);
-            dao.insert(menu).subscribe(insertObserver);
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-        thread.join();
+        assertNotNull(menu);
+        dao.insert(menu).subscribe(insertObserver);
         getMenus(dao);
     }
 
@@ -70,12 +65,7 @@ public class DataBaseTest {
                 fail();
             }
         };
-        Runnable runnable = () -> {
-            dao.getAll().subscribe(queryObserver);
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-        thread.join();
+        dao.getAll().subscribe(queryObserver);
     }
 
     private void deleteMenu(MenuDAO dao, Menu menu) throws InterruptedException {
@@ -87,13 +77,8 @@ public class DataBaseTest {
             @Override
             public void onError(@NonNull Throwable e) {}
         };
-        Runnable runnable = () -> {
-            assertNotNull(menu);
-            dao.delete(menu).subscribe(deleteObserver);
-        };
-        Thread thread = new Thread(runnable);
-        thread.start();
-        thread.join();
+        assertNotNull(menu);
+        dao.delete(menu).subscribe(deleteObserver);
         getMenus(dao);
     }
 
