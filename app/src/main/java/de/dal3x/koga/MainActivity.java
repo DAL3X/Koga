@@ -10,7 +10,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import de.dal3x.koga.menu.MenuRepository;
 import de.dal3x.koga.options.datastore.OptionsDataStore;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         optionButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), OptionsActivity.class)));
 
         // Initialize all resources if not already done
-        MenuRepository.getInstance(getApplication());
         OptionsDataStore.getInstance(getApplication());
     }
 }

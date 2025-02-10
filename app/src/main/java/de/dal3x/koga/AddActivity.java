@@ -13,13 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.HashMap;
-
-import de.dal3x.koga.menu.Carbohydrate;
-import de.dal3x.koga.menu.HealthScore;
-import de.dal3x.koga.menu.Menu;
-import de.dal3x.koga.menu.MenuRepository;
-import de.dal3x.koga.menu.room.Recipe;
+import de.dal3x.koga.example.Word;
+import de.dal3x.koga.example.WordRepository;
+import de.dal3x.koga.menu.room.MenuRepository;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -37,13 +33,24 @@ public class AddActivity extends AppCompatActivity {
         ImageButton back = findViewById(R.id.imageButton_home);
         back.setOnClickListener(view -> startActivity(new Intent(getApplication(), MainActivity.class)));
 
-        MenuRepository repo = MenuRepository.getInstance(getApplication());
+
+        WordRepository repository = new WordRepository(getApplication());
+        //repository.insert(new Word("test"));
+        //repository.deleteAll();
+
+        //MenuRepository repo = new MenuRepository(getApplication());
+        //repo.deleteAllMenus();
+        //repo.addMenu(new Menu("succ"));
 
         TextInputEditText name = findViewById(R.id.menu_name);
         Button add = findViewById(R.id.button_save);
+
         add.setOnClickListener(view -> {
-            repo.addMenu(new Menu(name.getEditableText().toString(), new Recipe(new HashMap<>()), 1, HealthScore.NORMAL, true, Carbohydrate.OTHER, ""));
-            name.setText("");
+            repository.getAllWords().observe(this, words -> {
+                if (!words.isEmpty()) {
+                    add.setText(words.get(0).getWord());
+                }
+            });
         });
     }
 }

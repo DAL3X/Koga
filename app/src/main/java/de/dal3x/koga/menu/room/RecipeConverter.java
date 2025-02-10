@@ -4,7 +4,7 @@ import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 
-public class RecipeConverter {
+class RecipeConverter {
 
     private static Gson gson;
 
