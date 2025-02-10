@@ -50,7 +50,7 @@ public class OptionsDataStore {
         storeInt(options.getMaxCarbDuplicates(), Names.OPTIONS_CARBS.string);
     }
 
-    private void loadDataStoreOptions() {
+    public void loadDataStoreOptions() {
         options = new Options(
                 loadInt(Names.OPTIONS_DAYS.string),
                 loadInt(Names.OPTIONS_DAYS.string),
