@@ -13,9 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import de.dal3x.koga.example.Word;
-import de.dal3x.koga.example.WordRepository;
-import de.dal3x.koga.menu.room.MenuRepository;
+import de.dal3x.koga.example.Menu;
+import de.dal3x.koga.example.MenuRepository;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -34,8 +33,9 @@ public class AddActivity extends AppCompatActivity {
         back.setOnClickListener(view -> startActivity(new Intent(getApplication(), MainActivity.class)));
 
 
-        WordRepository repository = new WordRepository(getApplication());
-        //repository.insert(new Word("test"));
+        MenuRepository repository = new MenuRepository(getApplication());
+        repository.deleteAll();
+        repository.insert(new Menu("bTest"));
         //repository.deleteAll();
 
         //MenuRepository repo = new MenuRepository(getApplication());
@@ -46,9 +46,9 @@ public class AddActivity extends AppCompatActivity {
         Button add = findViewById(R.id.button_save);
 
         add.setOnClickListener(view -> {
-            repository.getAllWords().observe(this, words -> {
+            repository.getAllMenus().observe(this, words -> {
                 if (!words.isEmpty()) {
-                    add.setText(words.get(0).getWord());
+                    add.setText(String.valueOf(words.size()));
                 }
             });
         });

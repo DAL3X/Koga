@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
-import de.dal3x.koga.menu.MenuRepository;
+import de.dal3x.koga.menu.room.MenuRepository;
 import de.dal3x.koga.menu.room.Recipe;
 import de.dal3x.koga.menu.Carbohydrate;
 import de.dal3x.koga.menu.HealthScore;

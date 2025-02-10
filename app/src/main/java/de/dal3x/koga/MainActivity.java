@@ -10,6 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import de.dal3x.koga.example.MenuRepository;
 import de.dal3x.koga.options.datastore.OptionsDataStore;
 
 public class MainActivity extends AppCompatActivity {
