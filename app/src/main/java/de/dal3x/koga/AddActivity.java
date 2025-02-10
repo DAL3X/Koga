@@ -31,21 +31,15 @@ public class AddActivity extends AppCompatActivity {
 
         ImageButton back = findViewById(R.id.imageButton_home);
         back.setOnClickListener(view -> startActivity(new Intent(getApplication(), MainActivity.class)));
+        TextInputEditText name = findViewById(R.id.menu_name);
+        Button add = findViewById(R.id.button_save);
 
 
         MenuRepository repository = new MenuRepository(getApplication());
         repository.deleteAll();
-        repository.insert(new Menu("bTest"));
-        //repository.deleteAll();
-
-        //MenuRepository repo = new MenuRepository(getApplication());
-        //repo.deleteAllMenus();
-        //repo.addMenu(new Menu("succ"));
-
-        TextInputEditText name = findViewById(R.id.menu_name);
-        Button add = findViewById(R.id.button_save);
 
         add.setOnClickListener(view -> {
+            repository.insert(new Menu(name.getEditableText().toString()));
             repository.getAllMenus().observe(this, words -> {
                 if (!words.isEmpty()) {
                     add.setText(String.valueOf(words.size()));

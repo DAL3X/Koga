@@ -10,7 +10,7 @@ public class Menu {
 
     @PrimaryKey
     @NonNull
-    //@ColumnInfo(name = "word")
+    @ColumnInfo(name = "word")
     public String name;
 
     public Menu(@NonNull String name) {
