@@ -18,8 +18,8 @@ import java.util.HashMap;
 import de.dal3x.koga.menu.Carbohydrate;
 import de.dal3x.koga.menu.HealthScore;
 import de.dal3x.koga.menu.Menu;
-import de.dal3x.koga.menu.MenuRepository;
-import de.dal3x.koga.menu.room.Recipe;
+import de.dal3x.koga.menu.room.Ingredients;
+import de.dal3x.koga.menu.room.MenuRepository;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -33,17 +33,26 @@ public class AddActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         ImageButton back = findViewById(R.id.imageButton_home);
         back.setOnClickListener(view -> startActivity(new Intent(getApplication(), MainActivity.class)));
-
-        MenuRepository repo = MenuRepository.getInstance(getApplication());
-
         TextInputEditText name = findViewById(R.id.menu_name);
-        Button add = findViewById(R.id.button_save);
-        add.setOnClickListener(view -> {
-            repo.addMenu(new Menu(name.getEditableText().toString(), new Recipe(new HashMap<>()), 1, HealthScore.NORMAL, true, Carbohydrate.OTHER, ""));
-            name.setText("");
+        Button addMenu = findViewById(R.id.button_save);
+
+        MenuRepository repository = new MenuRepository(getApplication());
+
+        // TODO implement actual adding of arbitrary menus after frontend is done
+        repository.deleteAllMenus();
+        addMenu.setOnClickListener(view -> {
+            Menu m = new Menu(name.getEditableText().toString(), 3, true, HealthScore.HEALTHY, Carbohydrate.PASTA, "", new Ingredients(new HashMap<>()));
+            repository.addMenu(m);
+            repository.getAllMenus().observe(this, menus -> {
+                if (!menus.isEmpty()) {
+                    addMenu.setText(String.valueOf(menus.size()));
+                }
+            });
         });
+
+
+
     }
 }

@@ -4,24 +4,24 @@ import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 
-public class RecipeConverter {
+class IngredientsConverter {
 
     private static Gson gson;
 
     @TypeConverter
-    public static Recipe recipeFromString(String string) {
+    public static Ingredients ingredientsFromString(String string) {
         if (gson == null) {
             gson = new Gson();
         }
-        return gson.fromJson(string, Recipe.class);
+        return gson.fromJson(string, Ingredients.class);
     }
 
     @TypeConverter
-    public static String recipeToString(Recipe recipe) {
+    public static String ingredientsToString(Ingredients ingredients) {
         if (gson == null) {
             gson = new Gson();
         }
-        return gson.toJson(recipe);
+        return gson.toJson(ingredients);
     }
 
 }

@@ -1,11 +1,12 @@
 package de.dal3x.koga.menu;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
 
-import de.dal3x.koga.menu.room.Recipe;
+import de.dal3x.koga.menu.room.Ingredients;
+
 
 /** Represents a menu consisting of a name, ingredients, a likeness value, health score,
  * veggie boolean, carbohydrate type.
@@ -17,31 +18,24 @@ public class Menu {
     @PrimaryKey
     @NonNull
     private String name;
-    private Recipe ingredients;
     private int likeness;
-    private HealthScore healthScore;
     private boolean isVeggie;
+    private HealthScore healthScore;
     private Carbohydrate carbohydrate;
-
     private String link;
     private boolean isLinked;
+    private Ingredients ingredients;
 
 
-    public Menu(String name, Recipe ingredients, int likeness, HealthScore healthScore, boolean isVeggie, Carbohydrate carbohydrate, String link) {
-        this.name = ""; //Because name is not allowed to be Null
-        setName(name);
-        setIngredients(ingredients);
-        setLikeness(likeness);
-        setHealthScore(healthScore);
-        setVeggie(isVeggie);
-        setCarbohydrate(carbohydrate);
-        setLink(link);
-        isLinked = !link.isBlank(); //sets isLinked to false if link equals empty string
-    }
-
-    @Ignore
-    public Menu(@NonNull String name) {
+    public Menu(@NonNull String name, int likeness, boolean isVeggie, HealthScore healthScore, Carbohydrate carbohydrate, String link, Ingredients ingredients) {
         this.name = name;
+        this.likeness = likeness;
+        this.isVeggie = isVeggie;
+        this.healthScore = healthScore;
+        this.carbohydrate = carbohydrate;
+        this.link = link;
+        isLinked = !link.isBlank(); //sets isLinked to false if link equals empty string
+        this.ingredients = ingredients;
     }
 
     @NonNull
@@ -51,15 +45,6 @@ public class Menu {
 
     public void setName(@NonNull String name) {
         this.name = name;
-    }
-
-
-    public Recipe getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(Recipe ingredients) {
-        this.ingredients = ingredients;
     }
 
     public int getLikeness() {
@@ -109,5 +94,13 @@ public class Menu {
 
     public boolean isLinked() {
         return isLinked;
+    }
+
+    public Ingredients getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Ingredients ingredients) {
+        this.ingredients = ingredients;
     }
 }

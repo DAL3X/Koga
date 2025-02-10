@@ -2,11 +2,10 @@ package de.dal3x.koga.menu.room;
 
 import java.util.Map;
 
-public class Recipe {
-
+public class Ingredients {
     private Map<String, Double> contents;
 
-    public Recipe(Map<String, Double> contents) {
+    public Ingredients(Map<String, Double> contents) {
         setContents(contents);
     }
 
