@@ -13,8 +13,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-import de.dal3x.koga.example.Menu;
-import de.dal3x.koga.example.MenuRepository;
+import de.dal3x.koga.menu.Menu;
+import de.dal3x.koga.menu.MenuRepository;
 
 public class AddActivity extends AppCompatActivity {
 

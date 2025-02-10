@@ -1,4 +1,4 @@
-package de.dal3x.koga.example;
+package de.dal3x.koga.menu;
 
 
 import androidx.lifecycle.LiveData;
