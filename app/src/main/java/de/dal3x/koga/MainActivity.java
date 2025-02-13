@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Button addMenuButton = findViewById(R.id.button_addmenu);
         addMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), AddActivity.class)));
         Button listMenuButton = findViewById(R.id.button_listmenu);
-        listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), OptionsActivity.class)));
+        listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), ListActivity.class)));
         Button optionButton = findViewById(R.id.button_options);
         optionButton.setOnClickListener(view -> startActivity(new Intent(getApplication(), OptionsActivity.class)));
 
