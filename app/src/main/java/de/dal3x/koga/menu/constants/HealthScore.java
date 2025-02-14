@@ -5,9 +5,5 @@ public enum HealthScore {
     NORMAL(1),
     HEALTHY(2);
 
-    public final int number;
-
-    HealthScore(int number) {
-        this.number = number;
-    }
+    HealthScore(int rating) {}
 }
