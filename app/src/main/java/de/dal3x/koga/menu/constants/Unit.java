@@ -6,21 +6,18 @@ import de.dal3x.koga.R;
 
 public enum Unit {
     GRAM,
-    KILOGRAM,
     PACKET,
-    LITRE,
+    MILLILITRE,
     PIECE;
 
     public String getString(Context context) {
         switch(this) {
             case GRAM:
                 return context.getResources().getString(R.string.unit_gram);
-            case KILOGRAM:
-                return context.getResources().getString(R.string.unit_kilogram);
             case PACKET:
                 return context.getResources().getString(R.string.unit_packet);
-            case LITRE:
-                return context.getResources().getString(R.string.unit_litre);
+            case MILLILITRE:
+                return context.getResources().getString(R.string.unit_millilitre);
             case PIECE:
                 return context.getResources().getString(R.string.unit_piece);
         }

@@ -40,8 +40,7 @@
     <string name="carbohydrate_nothing">Nothing</string>
 
     <string name="unit_gram">g</string>
-    <string name="unit_kilogram">kg</string>
-    <string name="unit_litre">litre</string>
+    <string name="unit_millilitre">litre</string>
     <string name="unit_packet">pack</string>
     <string name="unit_piece">piece</string>
     <string name="unit_none">no available unit</string>
