@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -38,14 +40,17 @@ public class AddActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         });
-        TextInputEditText name = findViewById(R.id.menu_name);
         Button addMenu = findViewById(R.id.button_save);
 
         MenuRepository repository = new MenuRepository(getApplicationContext());
 
-        // TODO implement actual adding of arbitrary menus after frontend is done
         addMenu.setOnClickListener(view -> {
-            Menu m = new Menu(name.getEditableText().toString(), 3, true, HealthScore.HEALTHY, Carbohydrate.PASTA, "", new Ingredients(new HashMap<>()));
+            TextInputEditText menuName = findViewById(R.id.menu_name);
+            RatingBar likeRating = findViewById(R.id.menu_likeness);
+            SwitchCompat veggie = findViewById(R.id.menu_isVeggie);
+            RatingBar healthScore = findViewById(R.id.menu_healthScore);
+            Menu m = new Menu(menuName.getEditableText().toString(), likeRating.getNumStars(), veggie.isActivated(),
+                    HealthScore.fromRating(healthScore.getNumStars() - 1), Carbohydrate.PASTA, "", new Ingredients(new HashMap<>()));
             repository.addMenu(m);
         });
 

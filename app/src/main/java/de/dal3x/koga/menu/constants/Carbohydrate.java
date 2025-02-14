@@ -27,4 +27,6 @@ public enum Carbohydrate {
         }
         return context.getResources().getString(R.string.carbohydrate_nothing);
     }
+
+
 }
