@@ -9,6 +9,9 @@
     <string name="button_listmenu">List Menus</string>
     <string name="button_options">Options</string>
 
+    <!--activity-koga -->
+    <string name="header_koga">Koga!</string>
+
     <!--activity-add-->
     <string name="header_add">Add Menu</string>
     <string name="button_save">Save</string>
