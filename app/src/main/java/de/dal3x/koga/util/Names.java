@@ -1,19 +1,12 @@
 package de.dal3x.koga.util;
 
-// Enum containing all string that are hardcoded and solely used as identifiers.
+// Enum containing all name identifiers.
 public enum Names {
-
-    OPTIONSSTORE("options_datastore"),
-    MENUSTORE("menu_database"),
-    OPTIONS_DAYS("numberDays"),
-    OPTIONS_MEAT("numberMeat"),
-    OPTIONS_DUPLICATE("maxDuplicate"),
-    OPTIONS_HEALTH("maxHealthScore"),
-    OPTIONS_CARBS("maxCarbDuplicates");
-
-    public final String string;
-
-    Names(String string) {
-        this.string = string;
-    }
+    OPTIONSSTORE,
+    MENUSTORE,
+    OPTIONS_DAYS,
+    OPTIONS_MEAT,
+    OPTIONS_DUPLICATE,
+    OPTIONS_HEALTH,
+    OPTIONS_CARBS;
 }

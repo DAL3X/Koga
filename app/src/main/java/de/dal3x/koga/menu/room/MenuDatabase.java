@@ -28,7 +28,7 @@ abstract class MenuDatabase extends RoomDatabase {
         if (instance == null) {
             synchronized (MenuDatabase.class) {
                 if (instance == null) {
-                    instance = Room.databaseBuilder(context.getApplicationContext(), MenuDatabase.class, Names.MENUSTORE.string).build();
+                    instance = Room.databaseBuilder(context.getApplicationContext(), MenuDatabase.class, Names.MENUSTORE.name()).build();
                 }
             }
         }

@@ -34,7 +34,7 @@ public class OptionsDataStore {
 
     private OptionsDataStore(Context context) {
         options = new Options();
-        rxDataStore = new RxPreferenceDataStoreBuilder(context, Names.OPTIONSSTORE.string).build();
+        rxDataStore = new RxPreferenceDataStoreBuilder(context, Names.OPTIONSSTORE.name()).build();
     }
 
     public Options getOptions() {
@@ -43,20 +43,20 @@ public class OptionsDataStore {
 
     public void storeOptions(Options options) {
         this.options = options;
-        storeInt(options.getNumberDays(), Names.OPTIONS_DAYS.string);
-        storeInt(options.getNumberMeat(), Names.OPTIONS_MEAT.string);
-        storeInt(options.getMaxDuplicate(), Names.OPTIONS_DUPLICATE.string);
-        storeDouble(options.getMaxHealthScore(), Names.OPTIONS_HEALTH.string);
-        storeInt(options.getMaxCarbDuplicates(), Names.OPTIONS_CARBS.string);
+        storeInt(options.getNumberDays(), Names.OPTIONS_DAYS.name());
+        storeInt(options.getNumberMeat(), Names.OPTIONS_MEAT.name());
+        storeInt(options.getMaxDuplicate(), Names.OPTIONS_DUPLICATE.name());
+        storeDouble(options.getMaxHealthScore(), Names.OPTIONS_HEALTH.name());
+        storeInt(options.getMaxCarbDuplicates(), Names.OPTIONS_CARBS.name());
     }
 
     public void loadDataStoreOptions() {
         options = new Options(
-                loadInt(Names.OPTIONS_DAYS.string),
-                loadInt(Names.OPTIONS_DAYS.string),
-                loadInt(Names.OPTIONS_DUPLICATE.string),
-                loadDouble(Names.OPTIONS_HEALTH.string),
-                loadInt(Names.OPTIONS_CARBS.string)
+                loadInt(Names.OPTIONS_DAYS.name()),
+                loadInt(Names.OPTIONS_DAYS.name()),
+                loadInt(Names.OPTIONS_DUPLICATE.name()),
+                loadDouble(Names.OPTIONS_HEALTH.name()),
+                loadInt(Names.OPTIONS_CARBS.name())
         );
     }
 
