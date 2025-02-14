@@ -4,6 +4,8 @@ import androidx.room.TypeConverter;
 
 import com.google.gson.Gson;
 
+import de.dal3x.koga.menu.Ingredients;
+
 class IngredientsConverter {
 
     private static Gson gson;

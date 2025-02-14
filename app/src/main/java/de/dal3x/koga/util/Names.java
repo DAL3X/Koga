@@ -8,5 +8,5 @@ public enum Names {
     OPTIONS_MEAT,
     OPTIONS_DUPLICATE,
     OPTIONS_HEALTH,
-    OPTIONS_CARBS;
+    OPTIONS_CARBS
 }

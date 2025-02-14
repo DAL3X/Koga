@@ -1,11 +1,11 @@
 package de.dal3x.koga.menu;
 
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.annotation.NonNull;
 
-import de.dal3x.koga.menu.room.Ingredients;
+import de.dal3x.koga.menu.constants.Carbohydrate;
+import de.dal3x.koga.menu.constants.HealthScore;
 
 
 /** Represents a menu consisting of a name, ingredients, a likeness value, health score,

@@ -15,10 +15,10 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 
-import de.dal3x.koga.menu.Carbohydrate;
-import de.dal3x.koga.menu.HealthScore;
+import de.dal3x.koga.menu.constants.Carbohydrate;
+import de.dal3x.koga.menu.constants.HealthScore;
 import de.dal3x.koga.menu.Menu;
-import de.dal3x.koga.menu.room.Ingredients;
+import de.dal3x.koga.menu.Ingredients;
 import de.dal3x.koga.menu.room.MenuRepository;
 
 public class AddActivity extends AppCompatActivity {

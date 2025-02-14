@@ -1,4 +1,4 @@
-package de.dal3x.koga.menu;
+package de.dal3x.koga.menu.constants;
 
 public enum HealthScore {
     HEALTHY(0),

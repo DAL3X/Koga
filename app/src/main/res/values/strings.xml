@@ -14,4 +14,11 @@
     <string name="text_name_input">Name:</string>
     <string name="textinput_name">Essens-Name</string>
 
+    <string name="unit_gram">g</string>
+    <string name="unit_kilogram">kg</string>
+    <string name="unit_litre">litre</string>
+    <string name="unit_packet">pack</string>
+    <string name="unit_piece">piece</string>
+    <string name="unit_none">no available unit</string>
+
 </resources>
