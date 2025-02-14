@@ -44,15 +44,9 @@ public class AddActivity extends AppCompatActivity {
         MenuRepository repository = new MenuRepository(getApplicationContext());
 
         // TODO implement actual adding of arbitrary menus after frontend is done
-        repository.deleteAllMenus();
         addMenu.setOnClickListener(view -> {
             Menu m = new Menu(name.getEditableText().toString(), 3, true, HealthScore.HEALTHY, Carbohydrate.PASTA, "", new Ingredients(new HashMap<>()));
             repository.addMenu(m);
-            repository.getAllMenus().observe(this, menus -> {
-                if (!menus.isEmpty()) {
-                    addMenu.setText(String.valueOf(menus.size()));
-                }
-            });
         });
 
 
