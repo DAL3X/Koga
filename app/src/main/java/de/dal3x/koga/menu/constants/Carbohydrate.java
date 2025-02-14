@@ -5,12 +5,12 @@ import android.content.Context;
 import de.dal3x.koga.R;
 
 public enum Carbohydrate {
+    NONE,
     PASTA,
     RICE,
     POTATO,
     BREAD,
-    OTHER,
-    NONE;
+    OTHER;
 
     public String getString(Context context) {
         switch(this) {

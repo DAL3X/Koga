@@ -2,9 +2,11 @@ package de.dal3x.koga;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +17,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import de.dal3x.koga.menu.constants.Carbohydrate;
 import de.dal3x.koga.menu.constants.HealthScore;
@@ -44,13 +49,23 @@ public class AddActivity extends AppCompatActivity {
 
         MenuRepository repository = new MenuRepository(getApplicationContext());
 
+        // Spinner list containing all Carbohydrate values in string format of current language
+        List<String> carbSpinnerList = Arrays.stream(Carbohydrate.values()).map(value -> value.getString(getApplicationContext())).collect(Collectors.toList());
+        ArrayAdapter<String> carbSpinnerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, carbSpinnerList);
+        carbSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner carbSpinner = findViewById(R.id.menu_carbohydrate);
+        carbSpinner.setAdapter(carbSpinnerAdapter);
+
+
         addMenu.setOnClickListener(view -> {
             TextInputEditText menuName = findViewById(R.id.menu_name);
             RatingBar likeRating = findViewById(R.id.menu_likeness);
             SwitchCompat veggie = findViewById(R.id.menu_isVeggie);
             RatingBar healthScore = findViewById(R.id.menu_healthScore);
+
             Menu m = new Menu(menuName.getEditableText().toString(), likeRating.getNumStars(), veggie.isActivated(),
-                    HealthScore.fromRating(healthScore.getNumStars() - 1), Carbohydrate.PASTA, "", new Ingredients(new HashMap<>()));
+                    HealthScore.fromRating(healthScore.getNumStars() - 1), Carbohydrate.valueOf(carbSpinner.getSelectedItem().toString()),
+                    "", new Ingredients(new HashMap<>()));
             repository.addMenu(m);
         });
 
