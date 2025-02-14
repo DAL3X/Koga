@@ -41,7 +41,7 @@ public class ListActivity extends AppCompatActivity {
             if (!menus.isEmpty()) {
                 RecyclerView recycler = findViewById(R.id.menu_list);
                 recycler.setLayoutManager(new LinearLayoutManager(this));
-                recycler.setAdapter(new MenuCardAdapter(menus, this));
+                recycler.setAdapter(new MenuCardAdapter(menus));
             }
         });
     }
