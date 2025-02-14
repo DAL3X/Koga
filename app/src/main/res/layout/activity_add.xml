@@ -30,6 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:contentDescription="@string/header_home"
             app:srcCompat="@android:drawable/ic_menu_compass" />
 
     </LinearLayout>
@@ -43,16 +44,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="6dp">
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/textView_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -74,6 +75,119 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_likeness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp"
+                    android:text="@string/text_likeness_input"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/menu_likeness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:rating="3"
+                    android:stepSize="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_isVeggie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp"
+                    android:text="@string/text_isVeggie_input"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Switch
+                    android:id="@+id/menu_isVeggie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:minWidth="50dp"
+                    android:minHeight="50dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    android:textSize="34sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_healthScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp"
+                    android:text="@string/text_healthScore_input"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/menu_healthScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="3"
+                    android:rating="2"
+                    android:stepSize="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/textView_carbohydrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="14dp"
+                    android:text="@string/text_carbohydrate_input"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/menu_carbohydrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="150dp"
+                    android:minHeight="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/button_save"

@@ -1,18 +1,40 @@
 <resources>
+    <!--general-->
     <string name="app_name">Koga</string>
-    <string name="header_home">Home</string>
-    <string name="header_add">Add Menu</string>
-    <string name="header_list">List</string>
-    <string name="header_options">Option</string>
 
+    <!--activity-main-->
+    <string name="header_home">Home</string>
     <string name="button_koga">Koga!</string>
     <string name="button_addmenu">Add Menu</string>
     <string name="button_listmenu">List Menus</string>
     <string name="button_options">Options</string>
 
+    <!--activity-add-->
+    <string name="header_add">Add Menu</string>
     <string name="button_save">Save</string>
     <string name="text_name_input">Name:</string>
-    <string name="textinput_name">Essens-Name</string>
+    <string name="textinput_name">Menu-Name</string>
+    <string name="text_likeness_input">Likeness:</string>
+    <string name="text_isVeggie_input">Veggie:</string>
+    <string name="text_healthScore_input">Health Score:</string>
+    <string name="text_carbohydrate_input">Carbohydrate:</string>
+    <string name="text_ingredients_input">Ingredients:</string>
+    <string name="text_link_input">Link with:</string>
+
+
+    <!--activity-list -->
+    <string name="header_list">List</string>
+
+    <!--activity-option-->
+    <string name="header_options">Option</string>
+
+    <!--constants-->
+    <string name="carbohydrate_pasta">Pasta</string>
+    <string name="carbohydrate_rice">Rice</string>
+    <string name="carbohydrate_potato">Potato</string>
+    <string name="carbohydrate_bread">Bread</string>
+    <string name="carbohydrate_other">Other</string>
+    <string name="carbohydrate_nothing">Nothing</string>
 
     <string name="unit_gram">g</string>
     <string name="unit_kilogram">kg</string>
