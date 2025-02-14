@@ -1,6 +1,5 @@
 package de.dal3x.koga.list;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +13,11 @@ import java.util.List;
 import de.dal3x.koga.R;
 import de.dal3x.koga.menu.Menu;
 
-public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MenuViewHolder> {
+public class MenuCardAdapter extends RecyclerView.Adapter<MenuCardAdapter.MenuViewHolder> {
 
     private final List<Menu> menus;
 
-    public CardAdapter(List<Menu> menus) {
+    public MenuCardAdapter(List<Menu> menus) {
         this.menus = menus;
     }
 

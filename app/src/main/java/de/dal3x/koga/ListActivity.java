@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import de.dal3x.koga.list.CardAdapter;
+import de.dal3x.koga.list.MenuCardAdapter;
 import de.dal3x.koga.menu.room.MenuRepository;
 
 public class ListActivity extends AppCompatActivity {
@@ -38,7 +38,7 @@ public class ListActivity extends AppCompatActivity {
             if (!menus.isEmpty()) {
                 RecyclerView recycler = findViewById(R.id.menu_list);
                 recycler.setLayoutManager(new LinearLayoutManager(this));
-                recycler.setAdapter(new CardAdapter(menus));
+                recycler.setAdapter(new MenuCardAdapter(menus));
             }
         });
     }
