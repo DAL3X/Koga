@@ -25,24 +25,12 @@ public class MainActivity extends AppCompatActivity {
 
         // Implement all button functionality
         Button kogaButton = findViewById(R.id.button_koga);
-        kogaButton.setOnClickListener(view -> {
-            finish();
-            startActivity(new Intent(getApplicationContext(), KogaActivity.class));
-        });
+        kogaButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), KogaActivity.class)));
         Button addMenuButton = findViewById(R.id.button_addmenu);
-        addMenuButton.setOnClickListener(view -> {
-            finish();
-            startActivity(new Intent(getApplicationContext(), AddActivity.class));
-        });
+        addMenuButton.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), AddActivity.class)));
         Button listMenuButton = findViewById(R.id.button_listmenu);
-        listMenuButton.setOnClickListener(view -> {
-            finish();
-            startActivity(new Intent(getApplicationContext(), ListActivity.class));
-        });
+        listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ListActivity.class)));
         Button optionButton = findViewById(R.id.button_options);
-        optionButton.setOnClickListener(view -> {
-            finish();
-            startActivity(new Intent(getApplicationContext(), OptionsActivity.class));
-        });
+        optionButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
     }
 }
