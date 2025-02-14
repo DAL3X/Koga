@@ -63,10 +63,11 @@ public class AddActivity extends AppCompatActivity {
             SwitchCompat veggie = findViewById(R.id.menu_isVeggie);
             RatingBar healthScore = findViewById(R.id.menu_healthScore);
 
-            Menu m = new Menu(menuName.getEditableText().toString(), likeRating.getNumStars(), veggie.isActivated(),
-                    HealthScore.fromRating(healthScore.getNumStars() - 1), Carbohydrate.valueOf(carbSpinner.getSelectedItem().toString()),
+            Menu menu = new Menu(menuName.getEditableText().toString(), Math.round(likeRating.getRating()), veggie.isChecked(),
+                    HealthScore.fromRating(Math.round(healthScore.getRating()) - 1),
+                    Carbohydrate.fromString(getApplicationContext(), carbSpinner.getSelectedItem().toString()),
                     "", new Ingredients(new HashMap<>()));
-            repository.addMenu(m);
+            repository.addMenu(menu);
         });
 
 
