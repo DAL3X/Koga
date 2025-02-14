@@ -1,9 +1,9 @@
 package de.dal3x.koga.menu.constants;
 
 public enum HealthScore {
-    HEALTHY(0),
+    UNHEALTHY(0),
     NORMAL(1),
-    UNHEALTHY(2);
+    HEALTHY(2);
 
     public final int number;
 
