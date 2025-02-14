@@ -9,7 +9,7 @@ import androidx.datastore.preferences.rxjava2.RxPreferenceDataStoreBuilder;
 import androidx.datastore.rxjava2.RxDataStore;
 
 import de.dal3x.koga.options.Options;
-import de.dal3x.koga.util.Names;
+import de.dal3x.koga.util.constants.Names;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 

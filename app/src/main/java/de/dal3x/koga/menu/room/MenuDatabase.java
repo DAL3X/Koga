@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import de.dal3x.koga.menu.Menu;
-import de.dal3x.koga.util.Names;
+import de.dal3x.koga.util.constants.Names;
 
 
 @Database(entities = {Menu.class}, version = 1, exportSchema = false)

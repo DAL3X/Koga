@@ -1,4 +1,4 @@
-package de.dal3x.koga.util;
+package de.dal3x.koga.util.constants;
 
 // Enum containing all name identifiers.
 public enum Names {
