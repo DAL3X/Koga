@@ -2,6 +2,8 @@ package de.dal3x.koga.menu.room;
 
 
 import android.app.Application;
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
@@ -15,8 +17,8 @@ public class MenuRepository {
     private final LiveData<List<Menu>> menus;
 
 
-    public MenuRepository(Application application) {
-        MenuDatabase db = MenuDatabase.getDatabase(application);
+    public MenuRepository(Context context) {
+        MenuDatabase db = MenuDatabase.getDatabase(context);
         menuDao = db.menuDao();
         menus = menuDao.getAll();
     }

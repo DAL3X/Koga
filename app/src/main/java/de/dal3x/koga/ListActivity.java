@@ -28,17 +28,20 @@ public class ListActivity extends AppCompatActivity {
             return insets;
         });
         ImageButton back = findViewById(R.id.imageButton_home);
-        back.setOnClickListener(view -> startActivity(new Intent(getApplication(), MainActivity.class)));
+        back.setOnClickListener(view -> {
+            finish();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        });
         initialCardView();
     }
 
     private void initialCardView() {
-        MenuRepository repository = new MenuRepository(getApplication());
+        MenuRepository repository = new MenuRepository(getApplicationContext());
         repository.getAllMenus().observe(this, menus -> {
             if (!menus.isEmpty()) {
                 RecyclerView recycler = findViewById(R.id.menu_list);
                 recycler.setLayoutManager(new LinearLayoutManager(this));
-                recycler.setAdapter(new MenuCardAdapter(menus));
+                recycler.setAdapter(new MenuCardAdapter(menus, this));
             }
         });
     }

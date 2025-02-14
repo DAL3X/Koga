@@ -34,11 +34,14 @@ public class AddActivity extends AppCompatActivity {
             return insets;
         });
         ImageButton back = findViewById(R.id.imageButton_home);
-        back.setOnClickListener(view -> startActivity(new Intent(getApplication(), MainActivity.class)));
+        back.setOnClickListener(view -> {
+            finish();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        });
         TextInputEditText name = findViewById(R.id.menu_name);
         Button addMenu = findViewById(R.id.button_save);
 
-        MenuRepository repository = new MenuRepository(getApplication());
+        MenuRepository repository = new MenuRepository(getApplicationContext());
 
         // TODO implement actual adding of arbitrary menus after frontend is done
         repository.deleteAllMenus();
