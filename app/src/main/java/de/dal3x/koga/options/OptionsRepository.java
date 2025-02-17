@@ -1,4 +1,4 @@
-package de.dal3x.koga.options.datastore;
+package de.dal3x.koga.options;
 
 import android.content.Context;
 
@@ -8,33 +8,29 @@ import androidx.datastore.preferences.core.PreferencesKeys;
 import androidx.datastore.preferences.rxjava2.RxPreferenceDataStoreBuilder;
 import androidx.datastore.rxjava2.RxDataStore;
 
-import de.dal3x.koga.options.Options;
 import de.dal3x.koga.util.constants.Names;
 import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /** Uses the RXJava library
- * Data storage implemented as a singleton to make sure only one RXDataStore is used per application.
+ * Data storage attribute implemented as a singleton to make sure only one RXDataStore is used per application.
  * Holds options in RAM but keeps them consistent with background storage.
  */
-public class OptionsDataStore {
+public class OptionsRepository {
 
-    private static OptionsDataStore instance;
+    private static RxDataStore<Preferences> rxDataStore;
 
-    public static OptionsDataStore getInstance(Context appContext) {
-        if (instance == null) {
-            instance = new OptionsDataStore(appContext);
-            instance.loadDataStoreOptions();
+    private static void initializeDataStore(Context appContext) {
+        if (rxDataStore == null) {
+            rxDataStore = new RxPreferenceDataStoreBuilder(appContext, Names.OPTIONSSTORE.name()).build();
         }
-        return instance;
     }
 
-    private final RxDataStore<Preferences> rxDataStore;
     private Options options;
 
-    private OptionsDataStore(Context context) {
-        options = new Options();
-        rxDataStore = new RxPreferenceDataStoreBuilder(context, Names.OPTIONSSTORE.name()).build();
+    public OptionsRepository(Context context) {
+        initializeDataStore(context);
+        loadDataStoreOptions();
     }
 
     public Options getOptions() {
@@ -50,14 +46,13 @@ public class OptionsDataStore {
         storeInt(options.getMaxCarbDuplicates(), Names.OPTIONS_CARBS.name());
     }
 
-    public void loadDataStoreOptions() {
-        options = new Options(
-                loadInt(Names.OPTIONS_DAYS.name()),
-                loadInt(Names.OPTIONS_DAYS.name()),
-                loadInt(Names.OPTIONS_DUPLICATE.name()),
-                loadDouble(Names.OPTIONS_HEALTH.name()),
-                loadInt(Names.OPTIONS_CARBS.name())
-        );
+    private void loadDataStoreOptions() {
+        options = new Options();
+        options.setNumberDays(loadIntFlow(Names.OPTIONS_DAYS.name()).blockingFirst());
+        options.setNumberMeat(loadIntFlow(Names.OPTIONS_MEAT.name()).blockingFirst());
+        options.setMaxDuplicate(loadIntFlow(Names.OPTIONS_DUPLICATE.name()).blockingFirst());
+        options.setMaxHealthScore(loadDoubleFlow(Names.OPTIONS_HEALTH.name()).blockingFirst());
+        options.setMaxCarbDuplicates(loadIntFlow(Names.OPTIONS_CARBS.name()).blockingFirst());
     }
 
     private void storeInt(int value, String key) {
@@ -69,14 +64,9 @@ public class OptionsDataStore {
         });
     }
 
-    private int loadInt(String key) {
+    private Flowable<Integer> loadIntFlow(String key) {
         Preferences.Key<Integer> intKey = PreferencesKeys.intKey(key);
-        Flowable<Integer> flow = rxDataStore.data().map(prefs -> prefs.get(intKey));
-        try {
-            return flow.blockingSingle();
-        } catch (NullPointerException e) {
-           return 0; // If the value does not exist yet, return a default value of zero.
-        }
+        return rxDataStore.data().map(prefs -> prefs.get(intKey));
     }
 
     private void storeDouble(double value, String key) {
@@ -88,14 +78,9 @@ public class OptionsDataStore {
         });
     }
 
-    private double loadDouble(String key) {
+    private Flowable<Double> loadDoubleFlow(String key) {
         Preferences.Key<Double> doubleKey = PreferencesKeys.doubleKey(key);
-        Flowable<Double> flow = rxDataStore.data().map(prefs -> prefs.get(doubleKey));
-        try {
-            return flow.blockingFirst();
-        } catch (NullPointerException e) {
-            return 0.0; // If the value does not exist yet, return a default value of zero.
-        }
+        return rxDataStore.data().map(prefs -> prefs.get(doubleKey));
     }
 
 
