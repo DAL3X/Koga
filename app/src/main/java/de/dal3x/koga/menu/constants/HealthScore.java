@@ -1,15 +1,15 @@
 package de.dal3x.koga.menu.constants;
 
 public enum HealthScore {
-    UNHEALTHY(0),
-    NORMAL(1),
-    HEALTHY(2);
+    UNHEALTHY(1),
+    NORMAL(2),
+    HEALTHY(3);
 
     public static HealthScore fromRating(int rating) {
         switch(rating) {
-            case 0: return UNHEALTHY;
-            case 1: return NORMAL;
-            case 2: return HEALTHY;
+            case 1: return UNHEALTHY;
+            case 2: return NORMAL;
+            case 3: return HEALTHY;
             default: return null; // rating not supported
         }
     }
