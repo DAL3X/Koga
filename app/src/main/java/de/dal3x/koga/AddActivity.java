@@ -64,7 +64,7 @@ public class AddActivity extends AppCompatActivity {
             RatingBar healthScore = findViewById(R.id.menu_healthScore);
 
             Menu menu = new Menu(menuName.getEditableText().toString(), Math.round(likeRating.getRating()), veggie.isChecked(),
-                    HealthScore.fromRating(Math.round(healthScore.getRating()) - 1),
+                    HealthScore.fromRating(Math.round(healthScore.getRating())),
                     Carbohydrate.fromString(getApplicationContext(), carbSpinner.getSelectedItem().toString()),
                     "", new Ingredients(new HashMap<>()));
             repository.addMenu(menu);
