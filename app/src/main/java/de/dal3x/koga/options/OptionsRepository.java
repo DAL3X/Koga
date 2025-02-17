@@ -42,7 +42,7 @@ public class OptionsRepository {
         storeInt(options.getNumberDays(), Names.OPTIONS_DAYS.name());
         storeInt(options.getNumberMeat(), Names.OPTIONS_MEAT.name());
         storeInt(options.getMaxDuplicate(), Names.OPTIONS_DUPLICATE.name());
-        storeDouble(options.getMaxHealthScore(), Names.OPTIONS_HEALTH.name());
+        storeDouble(options.getMinHealthScore(), Names.OPTIONS_HEALTH.name());
         storeInt(options.getMaxCarbDuplicates(), Names.OPTIONS_CARBS.name());
     }
 
@@ -51,7 +51,7 @@ public class OptionsRepository {
         options.setNumberDays(loadIntFlow(Names.OPTIONS_DAYS.name()).blockingFirst());
         options.setNumberMeat(loadIntFlow(Names.OPTIONS_MEAT.name()).blockingFirst());
         options.setMaxDuplicate(loadIntFlow(Names.OPTIONS_DUPLICATE.name()).blockingFirst());
-        options.setMaxHealthScore(loadDoubleFlow(Names.OPTIONS_HEALTH.name()).blockingFirst());
+        options.setMinHealthScore(loadDoubleFlow(Names.OPTIONS_HEALTH.name()).blockingFirst());
         options.setMaxCarbDuplicates(loadIntFlow(Names.OPTIONS_CARBS.name()).blockingFirst());
     }
 

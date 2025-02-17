@@ -6,16 +6,16 @@ public class Options {
     private int numberDays;
     private int numberMeat;
     private int maxDuplicate;
-    private double maxHealthScore;
+    private double minHealthScore;
     private int maxCarbDuplicates;
 
     public Options() {}
 
-    public Options (int numberDays, int numberMeat, int maxDuplicate, double maxHealthScore, int maxCarbDuplicates) {
+    public Options (int numberDays, int numberMeat, int maxDuplicate, double minHealthScore, int maxCarbDuplicates) {
         setNumberDays(numberDays);
         setNumberMeat(numberMeat);
         setMaxDuplicate(maxDuplicate);
-        setMaxHealthScore(maxHealthScore);
+        setMinHealthScore(minHealthScore);
         setMaxCarbDuplicates(maxCarbDuplicates);
     }
 
@@ -43,12 +43,12 @@ public class Options {
         this.maxDuplicate = maxDuplicate;
     }
 
-    public double getMaxHealthScore() {
-        return maxHealthScore;
+    public double getMinHealthScore() {
+        return minHealthScore;
     }
 
-    public void setMaxHealthScore(double maxHealthScore) {
-        this.maxHealthScore = maxHealthScore;
+    public void setMinHealthScore(double minHealthScore) {
+        this.minHealthScore = minHealthScore;
     }
 
     public int getMaxCarbDuplicates() {
