@@ -38,11 +38,9 @@ public class ListActivity extends AppCompatActivity {
     private void initialCardView() {
         MenuRepository repository = new MenuRepository(getApplicationContext());
         repository.getAllMenus().observe(this, menus -> {
-            if (!menus.isEmpty()) {
-                RecyclerView recycler = findViewById(R.id.menu_list);
-                recycler.setLayoutManager(new LinearLayoutManager(this));
-                recycler.setAdapter(new MenuCardAdapter(menus));
-            }
+            RecyclerView recycler = findViewById(R.id.menu_list);
+            recycler.setLayoutManager(new LinearLayoutManager(this));
+            recycler.setAdapter(new MenuCardAdapter(menus));
         });
     }
 }
