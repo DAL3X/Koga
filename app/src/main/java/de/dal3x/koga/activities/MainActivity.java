@@ -11,8 +11,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import de.dal3x.koga.R;
-import de.dal3x.koga.options.Options;
-import de.dal3x.koga.options.OptionsRepository;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,9 +35,5 @@ public class MainActivity extends AppCompatActivity {
         Button optionButton = findViewById(R.id.main_button_options);
         optionButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
 
-        // TODO remove and instead use options activity
-        Options opt = new Options(7, 4, 1, 2.2, 3);
-        OptionsRepository repo = new OptionsRepository(getApplicationContext());
-        repo.storeOptions(opt);
     }
 }

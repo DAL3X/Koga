@@ -26,7 +26,7 @@
             android:textSize="34sp" />
 
         <ImageButton
-            android:id="@+id/list_header_button"
+            android:id="@+id/options_header_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -150,7 +150,7 @@
                     android:textSize="20sp" />
 
                 <EditText
-                    android:id="@+id/editTextNumberDecimal2"
+                    android:id="@+id/options_input_health"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
