@@ -58,7 +58,7 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
             name = itemView.findViewById(R.id.koga_menu_name);
             itemView.findViewById(R.id.koga_button_reroll_menu).setOnClickListener(button -> {
                 generator.reRollMenu(getAdapterPosition());
-                adapter.notifyItemRangeChanged(getAdapterPosition(), adapter.getItemCount());
+                adapter.notifyItemRangeChanged(0, adapter.getItemCount());
             });
         }
 
