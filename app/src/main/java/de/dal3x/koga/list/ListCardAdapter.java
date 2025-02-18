@@ -14,11 +14,11 @@ import de.dal3x.koga.R;
 import de.dal3x.koga.menu.Menu;
 import de.dal3x.koga.menu.room.MenuRepository;
 
-public class MenuCardAdapter extends RecyclerView.Adapter<MenuCardAdapter.MenuViewHolder> {
+public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.MenuViewHolder> {
 
     private final List<Menu> menus;
 
-    public MenuCardAdapter(List<Menu> menus) {
+    public ListCardAdapter(List<Menu> menus) {
         this.menus = menus;
     }
 
@@ -45,7 +45,7 @@ public class MenuCardAdapter extends RecyclerView.Adapter<MenuCardAdapter.MenuVi
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
 
         private Menu menu;
-        private MenuCardAdapter adapter;
+        private ListCardAdapter adapter;
 
         private final TextView name;
         //extend here
@@ -65,7 +65,7 @@ public class MenuCardAdapter extends RecyclerView.Adapter<MenuCardAdapter.MenuVi
             // extend here
         }
 
-        public void setAdapter(MenuCardAdapter adapter) {
+        public void setAdapter(ListCardAdapter adapter) {
             this.adapter = adapter;
         }
 
