@@ -131,7 +131,6 @@ public class KogaGenerator implements LifecycleOwner {
         return select;
     }
 
-    // Returns a pair of the selected menu and its position in the given menus list
     private Menu selectRandomMenuWithContraints(List<Menu> menus, Options options, int selectedSize) {
         List<Menu> menuCopy = new LinkedList<>(menus);
         int counter = 0;
