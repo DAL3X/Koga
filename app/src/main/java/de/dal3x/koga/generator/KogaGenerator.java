@@ -79,7 +79,13 @@ public class KogaGenerator implements LifecycleOwner {
             Menu toRemove = selectList.get(position);
             selectedHealthSum.getAndSet(selectedHealthSum.get() - toRemove.getHealthScore().getRating());
             if (toRemove.getCarbohydrate() != Carbohydrate.NONE) {
-                carbohydrates.remove(toRemove.getCarbohydrate());
+                int carbNum = carbohydrates.get(toRemove.getCarbohydrate());
+                if (carbNum == 1) {
+                    carbohydrates.remove(toRemove.getCarbohydrate());
+                }
+                else {
+                    carbohydrates.put(toRemove.getCarbohydrate(), carbNum - 1);
+                }
             }
             int duplicate = duplicates.getOrDefault(toRemove.getName(), 1);
             if (duplicate == 1) {
