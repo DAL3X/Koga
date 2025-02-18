@@ -42,8 +42,10 @@ public class KogaGenerator {
         MenuRepository menuRepository = new MenuRepository(parentActivity.getApplicationContext());
         LiveData<List<Menu>> allMenusLive = menuRepository.getAllMenus();
         allMenusLive.observe(parentActivity, menus -> {
-            allMenus = menus;
-            generateMenus(parentActivity);
+            if (!menus.isEmpty()) {
+                allMenus = menus;
+                generateMenus(parentActivity);
+            }
         });
     }
 
@@ -71,6 +73,7 @@ public class KogaGenerator {
             if (!toRemove.isVeggie()) {
                 numMeat.getAndDecrement();
             }
+            allMenus.add(toRemove);
             selection.postValue(selectList);
             generateMenus(parentActivity);
         });
@@ -84,6 +87,9 @@ public class KogaGenerator {
                 Menu menu = generateAndCountOneValidMenu(options, allMenus, selectList.size());
                 if (menu != null) {
                     selectList.add(menu);
+                }
+                else {
+                    break; // No more valid menus
                 }
             }
             selection.postValue(selectList);
@@ -104,42 +110,47 @@ public class KogaGenerator {
         // Count carbohydrates
         Carbohydrate carbo = select.getCarbohydrate();
         if (carbo != Carbohydrate.NONE) {
-            carbohydrates.put(carbo, carbohydrates.getOrDefault(carbo, 1));
+            carbohydrates.put(carbo, carbohydrates.getOrDefault(carbo, 0) + 1);
         }
         // Count duplicates
         duplicates.put(select.getName(), duplicates.getOrDefault(select.getName(), 0) + 1);
-        // Then check if duplicate number allows for more duplicates
-        if (duplicates.get(select.getName()) >= options.getMaxDuplicate()) {
-            menus.remove(selectPair.second.intValue());
-        }
         return select;
     }
 
 
     // Returns a pair of the selected menu and its position in the given menus list
     private Pair<Menu, Integer> selectRandomMenuWithContraints(List<Menu> menus, Options options, int selectedSize) {
-        while (!menus.isEmpty()) {
-            int position = rand.nextInt(menus.size()); // Round 1 of selections: equals chances
-            Menu select = menus.get(position);
+        List<Menu> menuCopy = new LinkedList<>(menus);
+        while (!menuCopy.isEmpty()) {
+            int position = rand.nextInt(menuCopy.size()); // Round 1 of selections: equals chances
+            Menu select = menuCopy.get(position);
             // Now check eligibility of selected menu
             // Check for veggie eligibility
             if (!select.isVeggie()) {
                 if (numMeat.get() + 1 > options.getNumberMeat()) {
-                    menus.remove(position);
+                    menuCopy.remove(position);
                     continue;
                 }
             }
             // Check for carbohydrate eligibility
-            if (carbohydrates.getOrDefault(select.getCarbohydrate(), 0) + 1 >= options.getMaxCarbDuplicates()) {
-                menus.remove(position);
+            if ((carbohydrates.getOrDefault(select.getCarbohydrate(), 0) + 1 > options.getMaxCarbDuplicates()) && select.getCarbohydrate() != Carbohydrate.NONE) {
+                menuCopy.remove(position);
                 continue;
             }
             // Check for health score eligibility
-            double average = (double) (selectedHealthSum.get() + select.getHealthScore().getRating()) / (double) (selectedSize + 1);
+            double sum = selectedHealthSum.get() + select.getHealthScore().getRating();
+            double numberEntries = selectedSize + 1.0;
+            double average = sum / numberEntries;
             if (average < options.getMinHealthScore()) {
-                menus.remove(position);
+                menuCopy.remove(position);
                 continue;
             }
+            // Check for duplicate eligibility
+            if (options.getMaxDuplicate() < (duplicates.getOrDefault(select.getName(), 0) + 1)) {
+                menuCopy.remove(position);
+                continue;
+            }
+
             // All checks completed
             int random = rand.nextInt(5); // 5 is max ranking
             if (select.getLikeness() + random >= 5) { // Round 2 of selections: x likeness gets always taken in x/5 of cases
