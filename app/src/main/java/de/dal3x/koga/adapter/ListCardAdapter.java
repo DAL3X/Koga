@@ -1,4 +1,4 @@
-package de.dal3x.koga.list;
+package de.dal3x.koga.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

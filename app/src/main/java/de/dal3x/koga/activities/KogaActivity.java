@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import de.dal3x.koga.R;
 import de.dal3x.koga.generator.KogaGenerator;
-import de.dal3x.koga.list.KogaCardAdapter;
+import de.dal3x.koga.adapter.KogaCardAdapter;
 
 public class KogaActivity extends AppCompatActivity {
 

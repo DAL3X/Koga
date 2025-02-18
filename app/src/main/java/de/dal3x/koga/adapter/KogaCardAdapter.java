@@ -1,4 +1,4 @@
-package de.dal3x.koga.list;
+package de.dal3x.koga.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +51,6 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
 
     public static class MenuViewHolder extends RecyclerView.ViewHolder {
 
-        private Menu menu;
         private KogaCardAdapter adapter;
         private KogaGenerator generator;
         private AppCompatActivity parentActivity;
@@ -69,7 +68,6 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
         }
 
         public void setMenu(Menu menu) {
-            this.menu = menu;
             name.setText(menu.getName());
             // extend here
         }

@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import de.dal3x.koga.R;
-import de.dal3x.koga.list.ListCardAdapter;
+import de.dal3x.koga.adapter.ListCardAdapter;
 import de.dal3x.koga.menu.room.MenuRepository;
 
 public class ListActivity extends AppCompatActivity {
