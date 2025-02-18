@@ -30,6 +30,17 @@
 
     <!--activity-option-->
     <string name="header_options">Option</string>
+    <string name="text_days">Number of days:</string>
+    <string name="intinput_days">days</string>
+    <string name="text_meat">max number of meat-menus:</string>
+    <string name="intinpur_meat">max meat-menus</string>
+    <string name="text_duplicate">max number of duplicates:</string>
+    <string name="intinput_duplicate">max duplicates</string>
+    <string name="text_carbs">max number of carbohydrate duplicates:</string>
+    <string name="intinput_carbs">max carbohydrate duplicates</string>
+    <string name="text_health">min average health score:</string>
+    <string name="doubleinput_health">health score</string>
+
 
     <!--constants-->
     <string name="carbohydrate_pasta">Pasta</string>
