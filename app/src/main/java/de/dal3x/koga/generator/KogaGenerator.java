@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -28,17 +29,19 @@ public class KogaGenerator implements LifecycleOwner {
 
     private final LifecycleRegistry lifecycleRegistry;
     private final OptionsRepository optionsRepository;
-    private final MutableLiveData<List<Menu>> selection;
+    private final MutableLiveData<LinkedList<Menu>> selection;
     private final Random rand;
     private final Map<String, Integer> duplicates;
     private final AtomicInteger numMeat;
     private final AtomicInteger selectedHealthSum;
+    private final Queue<Integer> lastEdited;
     private final Map<Carbohydrate, Integer> carbohydrates;
     private List<Menu> allMenus;
 
     public KogaGenerator(Context context) {
         rand = new Random();
         duplicates = new HashMap<>();
+        lastEdited = new LinkedList<>();
         numMeat = new AtomicInteger(0);
         selectedHealthSum = new AtomicInteger(0);
         carbohydrates = new HashMap<>();
@@ -64,12 +67,12 @@ public class KogaGenerator implements LifecycleOwner {
         return lifecycleRegistry;
     }
 
-    public LiveData<List<Menu>> getSelection () {
+    public LiveData<LinkedList<Menu>> getSelection () {
         return selection;
     }
 
     public void reRollMenu(int position) {
-        Observer<List<Menu>> oneTimeSelectionObserver = selectList -> {
+        Observer<LinkedList<Menu>> oneTimeSelectionObserver = selectList -> {
             Menu toRemove = selectList.get(position);
             selectedHealthSum.getAndSet(selectedHealthSum.get() - toRemove.getHealthScore().getRating());
             if (toRemove.getCarbohydrate() != Carbohydrate.NONE) {
@@ -86,6 +89,7 @@ public class KogaGenerator implements LifecycleOwner {
                 numMeat.getAndDecrement();
             }
             selection.removeObservers(this);
+            lastEdited.add(position);
             selectList.remove(position);
             selection.postValue(selectList);
             generateMenus();
@@ -95,11 +99,14 @@ public class KogaGenerator implements LifecycleOwner {
 
     private void generateMenus() {
         Options options = optionsRepository.getOptions();
-        Observer<List<Menu>> oneTimeSelectionObserver = selectList -> {
+        Observer<LinkedList<Menu>> oneTimeSelectionObserver = selectList -> {
             while(selectList.size() < options.getNumberDays()) {
                 Menu menu = generateAndCountOneValidMenu(options, allMenus, selectList.size());
                 if (menu != null) {
-                    selectList.add(menu);
+                    if (lastEdited.isEmpty()) {
+                        lastEdited.add(selectList.size()); // just append if no position needs an update
+                    }
+                    selectList.add(lastEdited.remove(), menu);
                 }
                 else {
                     break; // No more valid menus
