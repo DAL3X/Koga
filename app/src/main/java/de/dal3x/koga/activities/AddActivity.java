@@ -41,29 +41,26 @@ public class AddActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton back = findViewById(R.id.imageButton_home);
+        ImageButton back = findViewById(R.id.add_header_button);
         back.setOnClickListener(view -> {
             finish();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         });
-        Button addMenu = findViewById(R.id.button_save);
+        Button addMenu = findViewById(R.id.add_button_save);
 
         MenuRepository repository = new MenuRepository(getApplicationContext());
-
         // Spinner list containing all Carbohydrate values in string format of current language
         List<String> carbSpinnerList = Arrays.stream(Carbohydrate.values()).map(value -> value.getString(getApplicationContext())).collect(Collectors.toList());
         ArrayAdapter<String> carbSpinnerAdapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_spinner_item, carbSpinnerList);
         carbSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner carbSpinner = findViewById(R.id.menu_carbohydrate);
+        Spinner carbSpinner = findViewById(R.id.add_input_carbohydrate);
         carbSpinner.setAdapter(carbSpinnerAdapter);
 
-
         addMenu.setOnClickListener(view -> {
-            TextInputEditText menuName = findViewById(R.id.menu_name);
-            RatingBar likeRating = findViewById(R.id.menu_likeness);
-            SwitchCompat veggie = findViewById(R.id.menu_isVeggie);
-            RatingBar healthScore = findViewById(R.id.menu_healthScore);
-
+            TextInputEditText menuName = findViewById(R.id.add_input_name);
+            RatingBar likeRating = findViewById(R.id.add_input_likeness);
+            SwitchCompat veggie = findViewById(R.id.add_input_veggie);
+            RatingBar healthScore = findViewById(R.id.add_input_health);
             Menu menu = new Menu(menuName.getEditableText().toString(), Math.round(likeRating.getRating()), veggie.isChecked(),
                     HealthScore.fromRating(Math.round(healthScore.getRating())),
                     Carbohydrate.fromString(getApplicationContext(), carbSpinner.getSelectedItem().toString()),

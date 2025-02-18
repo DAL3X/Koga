@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import de.dal3x.koga.R;
-import de.dal3x.koga.list.MenuCardAdapter;
+import de.dal3x.koga.list.ListCardAdapter;
 import de.dal3x.koga.menu.room.MenuRepository;
 
 public class ListActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class ListActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ImageButton back = findViewById(R.id.imageButton_home);
+        ImageButton back = findViewById(R.id.list_header_button);
         back.setOnClickListener(view -> {
             finish();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -39,9 +39,9 @@ public class ListActivity extends AppCompatActivity {
     private void initialCardView() {
         MenuRepository repository = new MenuRepository(getApplicationContext());
         repository.getAllMenus().observe(this, menus -> {
-            RecyclerView recycler = findViewById(R.id.menu_list);
+            RecyclerView recycler = findViewById(R.id.list_recycle);
             recycler.setLayoutManager(new LinearLayoutManager(this));
-            recycler.setAdapter(new MenuCardAdapter(menus));
+            recycler.setAdapter(new ListCardAdapter(menus));
         });
     }
 }

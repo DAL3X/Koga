@@ -22,12 +22,6 @@ import de.dal3x.koga.options.OptionsRepository;
 /** @noinspection DataFlowIssue*/
 public class KogaGenerator {
 
-    // A static active instance is needed for the reRoll button to be able call reRollMenu()
-    private static KogaGenerator activeInstance;
-    public static KogaGenerator getActiveInstance() {
-        return activeInstance;
-    }
-
     private final OptionsRepository optionsRepository;
     private final MutableLiveData<List<Menu>> selection;
     private final Random rand;
@@ -53,7 +47,6 @@ public class KogaGenerator {
                 generateMenus(parentActivity);
             }
         });
-        activeInstance = this;
     }
 
     public LiveData<List<Menu>> getSelection () {

@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Implement all button functionality
-        Button kogaButton = findViewById(R.id.button_koga);
+        Button kogaButton = findViewById(R.id.main_button_koga);
         kogaButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), KogaActivity.class)));
-        Button addMenuButton = findViewById(R.id.button_addmenu);
+        Button addMenuButton = findViewById(R.id.main_button_addmenu);
         addMenuButton.setOnClickListener(view ->  startActivity(new Intent(getApplicationContext(), AddActivity.class)));
-        Button listMenuButton = findViewById(R.id.button_listmenu);
+        Button listMenuButton = findViewById(R.id.main_button_listmenu);
         listMenuButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), ListActivity.class)));
-        Button optionButton = findViewById(R.id.button_options);
+        Button optionButton = findViewById(R.id.main_button_options);
         optionButton.setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), OptionsActivity.class)));
 
         // TODO remove and instead use options activity

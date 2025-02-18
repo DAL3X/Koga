@@ -14,12 +14,12 @@
         android:layout_height="wrap_content"
         android:background="@color/lightBlue"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintBottom_toTopOf="@+id/koga_scroll"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/header_koga"
+            android:id="@+id/koga_header_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -29,7 +29,7 @@
             android:textSize="34sp" />
 
         <ImageButton
-            android:id="@+id/imageButton_home"
+            android:id="@+id/koga_header_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -37,7 +37,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/koga_scroll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="12dp"
@@ -51,7 +51,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/menu_list"
+                android:id="@+id/koga_recycle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

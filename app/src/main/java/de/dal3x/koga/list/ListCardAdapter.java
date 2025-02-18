@@ -52,8 +52,8 @@ public class ListCardAdapter extends RecyclerView.Adapter<ListCardAdapter.MenuVi
 
         public MenuViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.menu_name);
-            itemView.findViewById(R.id.deleteMenuButton).setOnClickListener(button -> {
+            name = itemView.findViewById(R.id.list_menu_name);
+            itemView.findViewById(R.id.list_button_delete_menu).setOnClickListener(button -> {
                 new MenuRepository(itemView.getContext()).deleteMenu(menu);
                 adapter.notifyItemRemoved(getAdapterPosition());
             });

@@ -1,15 +1,20 @@
 package de.dal3x.koga.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import de.dal3x.koga.R;
 import de.dal3x.koga.generator.KogaGenerator;
+import de.dal3x.koga.list.KogaCardAdapter;
 
 public class KogaActivity extends AppCompatActivity {
 
@@ -24,9 +29,21 @@ public class KogaActivity extends AppCompatActivity {
             return insets;
         });
 
+        ImageButton back = findViewById(R.id.koga_header_button);
+        back.setOnClickListener(view -> {
+            finish();
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        });
+
         KogaGenerator generator = new KogaGenerator(this);
         generator.getSelection().observe(this, selection -> {
-            // TODO update recycleview
+            if (!selection.isEmpty()) {
+                RecyclerView recycler = findViewById(R.id.koga_recycle);
+                recycler.setLayoutManager(new LinearLayoutManager(this));
+                recycler.setAdapter(new KogaCardAdapter(selection, generator, this));
+            }
         });
+
+
     }
 }

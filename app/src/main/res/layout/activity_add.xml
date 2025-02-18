@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/header_Add"
+            android:id="@+id/add_header_text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -26,7 +26,7 @@
             android:textSize="34sp" />
 
         <ImageButton
-            android:id="@+id/imageButton_home"
+            android:id="@+id/add_header_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,7 +53,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView_name"
+                    android:id="@+id/add_text_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -67,7 +67,7 @@
                     android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/menu_name"
+                        android:id="@+id/add_input_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/textinput_name"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView_likeness"
+                    android:id="@+id/add_text_likeness"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="14dp"
@@ -92,7 +92,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <RatingBar
-                    android:id="@+id/menu_likeness"
+                    android:id="@+id/add_input_likeness"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="5"
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView_isVeggie"
+                    android:id="@+id/add_text_veggie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="14dp"
@@ -119,7 +119,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/menu_isVeggie"
+                    android:id="@+id/add_input_veggie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView_healthScore"
+                    android:id="@+id/add_text_health"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="14dp"
@@ -151,7 +151,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <RatingBar
-                    android:id="@+id/menu_healthScore"
+                    android:id="@+id/add_input_health"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:numStars="3"
@@ -167,7 +167,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView_carbohydrate"
+                    android:id="@+id/add_text_carbohydrate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="14dp"
@@ -178,7 +178,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:id="@+id/menu_carbohydrate"
+                    android:id="@+id/add_input_carbohydrate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="150dp"
@@ -190,7 +190,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
-                android:id="@+id/button_save"
+                android:id="@+id/add_button_save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/darkGreen"
