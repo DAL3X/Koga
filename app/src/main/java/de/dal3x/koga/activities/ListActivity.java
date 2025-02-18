@@ -1,4 +1,4 @@
-package de.dal3x.koga;
+package de.dal3x.koga.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import de.dal3x.koga.R;
 import de.dal3x.koga.list.MenuCardAdapter;
 import de.dal3x.koga.menu.room.MenuRepository;
 

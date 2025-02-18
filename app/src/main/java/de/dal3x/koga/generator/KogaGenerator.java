@@ -22,6 +22,12 @@ import de.dal3x.koga.options.OptionsRepository;
 /** @noinspection DataFlowIssue*/
 public class KogaGenerator {
 
+    // A static active instance is needed for the reRoll button to be able call reRollMenu()
+    private static KogaGenerator activeInstance;
+    public static KogaGenerator getActiveInstance() {
+        return activeInstance;
+    }
+
     private final OptionsRepository optionsRepository;
     private final MutableLiveData<List<Menu>> selection;
     private final Random rand;
@@ -47,13 +53,13 @@ public class KogaGenerator {
                 generateMenus(parentActivity);
             }
         });
+        activeInstance = this;
     }
 
     public LiveData<List<Menu>> getSelection () {
         return selection;
     }
 
-    // Must not be called before allMenus is set.
     public void reRollMenu(AppCompatActivity parentActivity, int position) {
         selection.observe(parentActivity, selectList -> {
             Menu toRemove = selectList.get(position);
@@ -116,7 +122,6 @@ public class KogaGenerator {
         duplicates.put(select.getName(), duplicates.getOrDefault(select.getName(), 0) + 1);
         return select;
     }
-
 
     // Returns a pair of the selected menu and its position in the given menus list
     private Pair<Menu, Integer> selectRandomMenuWithContraints(List<Menu> menus, Options options, int selectedSize) {

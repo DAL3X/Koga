@@ -1,4 +1,4 @@
-package de.dal3x.koga;
+package de.dal3x.koga.activities;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import de.dal3x.koga.R;
 
 public class OptionsActivity extends AppCompatActivity {
 

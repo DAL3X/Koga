@@ -1,4 +1,4 @@
-package de.dal3x.koga;
+package de.dal3x.koga.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import de.dal3x.koga.R;
 import de.dal3x.koga.options.Options;
 import de.dal3x.koga.options.OptionsRepository;
 

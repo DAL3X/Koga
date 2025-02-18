@@ -1,4 +1,4 @@
-package de.dal3x.koga;
+package de.dal3x.koga.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import de.dal3x.koga.R;
 import de.dal3x.koga.menu.constants.Carbohydrate;
 import de.dal3x.koga.menu.constants.HealthScore;
 import de.dal3x.koga.menu.Menu;
