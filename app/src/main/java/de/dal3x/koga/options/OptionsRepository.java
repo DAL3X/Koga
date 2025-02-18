@@ -30,7 +30,12 @@ public class OptionsRepository {
 
     public OptionsRepository(Context context) {
         initializeDataStore(context);
-        loadDataStoreOptions();
+        if (checkIfExists()) {
+            loadDataStoreOptions();
+        }
+        else {
+            storeOptions(new Options());
+        }
     }
 
     public Options getOptions() {
@@ -53,6 +58,11 @@ public class OptionsRepository {
         options.setMaxDuplicate(loadIntFlow(Names.OPTIONS_DUPLICATE.name()).blockingFirst());
         options.setMinHealthScore(loadDoubleFlow(Names.OPTIONS_HEALTH.name()).blockingFirst());
         options.setMaxCarbDuplicates(loadIntFlow(Names.OPTIONS_CARBS.name()).blockingFirst());
+    }
+
+    private boolean checkIfExists() {
+        Preferences.Key<Integer> intKey = PreferencesKeys.intKey(Names.OPTIONS_DAYS.name());
+        return rxDataStore.data().map(prefs -> prefs.contains(intKey)).blockingFirst();
     }
 
     private void storeInt(int value, String key) {
