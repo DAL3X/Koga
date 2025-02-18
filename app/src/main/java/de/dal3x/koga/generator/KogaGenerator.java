@@ -109,7 +109,7 @@ public class KogaGenerator implements LifecycleOwner {
                     selectList.add(lastEdited.remove(), menu);
                 }
                 else {
-                    break; // No more valid menus
+                    selectList.clear(); // try again
                 }
             }
             selection.removeObservers(this);
