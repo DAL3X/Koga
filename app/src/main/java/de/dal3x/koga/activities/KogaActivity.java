@@ -40,7 +40,7 @@ public class KogaActivity extends AppCompatActivity {
             if (!selection.isEmpty()) {
                 RecyclerView recycler = findViewById(R.id.koga_recycle);
                 recycler.setLayoutManager(new LinearLayoutManager(this));
-                recycler.setAdapter(new KogaCardAdapter(selection, generator, this));
+                recycler.setAdapter(new KogaCardAdapter(selection, generator));
             }
         });
 

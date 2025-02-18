@@ -1,10 +1,14 @@
 package de.dal3x.koga.generator;
 
-import android.util.Pair;
+import android.content.Context;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LifecycleRegistry;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -20,8 +24,9 @@ import de.dal3x.koga.options.Options;
 import de.dal3x.koga.options.OptionsRepository;
 
 /** @noinspection DataFlowIssue*/
-public class KogaGenerator {
+public class KogaGenerator implements LifecycleOwner {
 
+    private final LifecycleRegistry lifecycleRegistry;
     private final OptionsRepository optionsRepository;
     private final MutableLiveData<List<Menu>> selection;
     private final Random rand;
@@ -31,33 +36,41 @@ public class KogaGenerator {
     private final Map<Carbohydrate, Integer> carbohydrates;
     private List<Menu> allMenus;
 
-    public KogaGenerator(AppCompatActivity parentActivity) {
+    public KogaGenerator(Context context) {
         rand = new Random();
         duplicates = new HashMap<>();
-        numMeat = new AtomicInteger();
-        selectedHealthSum = new AtomicInteger();
+        numMeat = new AtomicInteger(0);
+        selectedHealthSum = new AtomicInteger(0);
         carbohydrates = new HashMap<>();
         selection = new MutableLiveData<>();
-        optionsRepository = new OptionsRepository(parentActivity.getApplicationContext());
-        MenuRepository menuRepository = new MenuRepository(parentActivity.getApplicationContext());
+        selection.postValue(new LinkedList<>());
+        lifecycleRegistry = new LifecycleRegistry(this);
+        lifecycleRegistry.setCurrentState(Lifecycle.State.STARTED);
+        optionsRepository = new OptionsRepository(context);
+        MenuRepository menuRepository = new MenuRepository(context);
         LiveData<List<Menu>> allMenusLive = menuRepository.getAllMenus();
-        allMenusLive.observe(parentActivity, menus -> {
+        allMenusLive.observe(this, menus -> {
             if (!menus.isEmpty()) {
                 allMenus = menus;
-                generateMenus(parentActivity);
+                allMenusLive.removeObservers(this);
+                generateMenus();
             }
         });
+    }
+
+    @NonNull
+    @Override
+    public Lifecycle getLifecycle() {
+        return lifecycleRegistry;
     }
 
     public LiveData<List<Menu>> getSelection () {
         return selection;
     }
 
-    public void reRollMenu(AppCompatActivity parentActivity, int position) {
-        selection.observe(parentActivity, selectList -> {
+    public void reRollMenu(int position) {
+        Observer<List<Menu>> oneTimeSelectionObserver = selectList -> {
             Menu toRemove = selectList.get(position);
-            // remove from list, health sum, carbohydrates, duplicates and veggie
-            selectList.remove(position);
             selectedHealthSum.getAndSet(selectedHealthSum.get() - toRemove.getHealthScore().getRating());
             if (toRemove.getCarbohydrate() != Carbohydrate.NONE) {
                 carbohydrates.remove(toRemove.getCarbohydrate());
@@ -72,16 +85,17 @@ public class KogaGenerator {
             if (!toRemove.isVeggie()) {
                 numMeat.getAndDecrement();
             }
-            allMenus.add(toRemove);
+            selection.removeObservers(this);
+            selectList.remove(position);
             selection.postValue(selectList);
-            generateMenus(parentActivity);
-        });
+            generateMenus();
+        };
+        selection.observe(this, oneTimeSelectionObserver);
     }
 
-    private void generateMenus(AppCompatActivity parentActivity) {
+    private void generateMenus() {
         Options options = optionsRepository.getOptions();
-        selection.postValue(new LinkedList<>());
-        selection.observe(parentActivity, selectList -> {
+        Observer<List<Menu>> oneTimeSelectionObserver = selectList -> {
             while(selectList.size() < options.getNumberDays()) {
                 Menu menu = generateAndCountOneValidMenu(options, allMenus, selectList.size());
                 if (menu != null) {
@@ -91,16 +105,17 @@ public class KogaGenerator {
                     break; // No more valid menus
                 }
             }
+            selection.removeObservers(this);
             selection.postValue(selectList);
-        });
+        };
+        selection.observe(this, oneTimeSelectionObserver);
     }
 
     private Menu generateAndCountOneValidMenu(Options options, List<Menu> menus, int selectedSize) {
-        Pair<Menu, Integer> selectPair = selectRandomMenuWithContraints(menus, options, selectedSize);
-        if (selectPair == null) {
+        Menu select = selectRandomMenuWithContraints(menus, options, selectedSize);
+        if (select == null) {
             return null;
         }
-        Menu select = selectPair.first;
         selectedHealthSum.getAndAdd(select.getHealthScore().getRating());
         // Count meat
         if (!select.isVeggie()) {
@@ -117,12 +132,12 @@ public class KogaGenerator {
     }
 
     // Returns a pair of the selected menu and its position in the given menus list
-    private Pair<Menu, Integer> selectRandomMenuWithContraints(List<Menu> menus, Options options, int selectedSize) {
+    private Menu selectRandomMenuWithContraints(List<Menu> menus, Options options, int selectedSize) {
         List<Menu> menuCopy = new LinkedList<>(menus);
+        int counter = 0;
         while (!menuCopy.isEmpty()) {
             int position = rand.nextInt(menuCopy.size()); // Round 1 of selections: equals chances
             Menu select = menuCopy.get(position);
-            // Now check eligibility of selected menu
             // Check for veggie eligibility
             if (!select.isVeggie()) {
                 if (numMeat.get() + 1 > options.getNumberMeat()) {
@@ -148,15 +163,18 @@ public class KogaGenerator {
                 menuCopy.remove(position);
                 continue;
             }
-
             // All checks completed
-            int random = rand.nextInt(5); // 5 is max ranking
-            if (select.getLikeness() + random >= 5) { // Round 2 of selections: x likeness gets always taken in x/5 of cases
-                return new Pair<>(select, position);
+            int maxRating = 5;
+            int random = rand.nextInt(maxRating);
+            // Round 2 of selections: x likeness gets always taken in x/5 of cases, but at least every 5-th
+            if ((counter == maxRating )|| select.getLikeness() + random >= maxRating) {
+                return select;
+            }
+            else {
+                counter++;
             }
         }
-        // No menu can possible be added bc of at least 1 constraint
-        return null;
+        return null; // No menu can possible be added bc of at least 1 constraint
     }
 
 }

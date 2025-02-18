@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -19,12 +18,10 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
 
     private final List<Menu> menus;
     private final KogaGenerator generator;
-    private final AppCompatActivity parentActivity;
 
-    public KogaCardAdapter(List<Menu> menus, KogaGenerator generator, AppCompatActivity parentActivity) {
+    public KogaCardAdapter(List<Menu> menus, KogaGenerator generator) {
         this.menus = menus;
         this.generator = generator;
-        this.parentActivity = parentActivity;
     }
 
     @NonNull
@@ -40,7 +37,6 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
         holder.setMenu(menu);
         holder.setAdapter(this);
         holder.setGenerator(generator);
-        holder.setParentActivity(parentActivity);
     }
 
     @Override
@@ -53,7 +49,6 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
 
         private KogaCardAdapter adapter;
         private KogaGenerator generator;
-        private AppCompatActivity parentActivity;
 
         private final TextView name;
         //extend here
@@ -62,8 +57,8 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
             super(itemView);
             name = itemView.findViewById(R.id.koga_menu_name);
             itemView.findViewById(R.id.koga_button_reroll_menu).setOnClickListener(button -> {
-                generator.reRollMenu(parentActivity, getAdapterPosition());
-                adapter.notifyItemChanged(getAdapterPosition());
+                generator.reRollMenu(getAdapterPosition());
+                adapter.notifyItemRangeChanged(getAdapterPosition(), adapter.getItemCount());
             });
         }
 
@@ -78,10 +73,6 @@ public class KogaCardAdapter extends RecyclerView.Adapter<KogaCardAdapter.MenuVi
 
         public void setGenerator(KogaGenerator generator) {
             this.generator = generator;
-        }
-
-        public void setParentActivity(AppCompatActivity parentActivity) {
-            this.parentActivity = parentActivity;
         }
 
     }
