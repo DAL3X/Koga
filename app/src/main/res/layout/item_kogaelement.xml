@@ -40,7 +40,7 @@
                     android:text="@string/carbohydrate_other" />
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/koga_meat"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
