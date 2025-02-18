@@ -50,15 +50,17 @@ public class OptionsActivity extends AppCompatActivity {
 
         Button save = findViewById(R.id.options_button_save);
         save.setOnClickListener(view -> {
-            int numDays = Integer.parseInt(daysInput.getText().toString());
-            int meat = Integer.parseInt(meatInput.getText().toString());
-            int carbs = Integer.parseInt(carbInput.getText().toString());
-            int duplicates = Integer.parseInt(duplicateInput.getText().toString());
-            double health = Double.parseDouble(healthInput.getText().toString());
-            Options newOptions = new Options(numDays, meat, duplicates, health, carbs);
-            repository.storeOptions(newOptions);
-            finish();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            try {
+                int numDays = Integer.parseInt(daysInput.getText().toString());
+                int meat = Integer.parseInt(meatInput.getText().toString());
+                int carbs = Integer.parseInt(carbInput.getText().toString());
+                int duplicates = Integer.parseInt(duplicateInput.getText().toString());
+                double health = Double.parseDouble(healthInput.getText().toString());
+                Options newOptions = new Options(numDays, meat, duplicates, health, carbs);
+                repository.storeOptions(newOptions);
+                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            } catch (NumberFormatException ignored) {}
         });
     }
 }
