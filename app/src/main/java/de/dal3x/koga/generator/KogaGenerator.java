@@ -27,6 +27,9 @@ import de.dal3x.koga.options.OptionsRepository;
 /** @noinspection DataFlowIssue*/
 public class KogaGenerator implements LifecycleOwner {
 
+    // Max number of tries before no possibly selection is assumed
+    private final int numberMaxTries = 1000;
+
     private final LifecycleRegistry lifecycleRegistry;
     private final OptionsRepository optionsRepository;
     private final MutableLiveData<LinkedList<Menu>> selection;
@@ -100,7 +103,8 @@ public class KogaGenerator implements LifecycleOwner {
     private void generateMenus() {
         Options options = optionsRepository.getOptions();
         Observer<LinkedList<Menu>> oneTimeSelectionObserver = selectList -> {
-            while(selectList.size() < options.getNumberDays()) {
+            int counter = 0;
+            while(selectList.size() < options.getNumberDays() && counter < numberMaxTries) {
                 Menu menu = generateAndCountOneValidMenu(options, allMenus, selectList.size());
                 if (menu != null) {
                     if (lastEdited.isEmpty()) {
@@ -109,6 +113,7 @@ public class KogaGenerator implements LifecycleOwner {
                     selectList.add(lastEdited.remove(), menu);
                 }
                 else {
+                    counter++;
                     selectList.clear(); // try again
                 }
             }
